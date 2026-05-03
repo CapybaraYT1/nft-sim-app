@@ -1,0 +1,20 @@
+import os
+from flask import Flask, render_template, request, jsonify
+from supabase import create_client
+
+app = Flask(__name__)
+
+SUPABASE_URL = os.environ.get("SUPABASE_URL")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
+supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/user", methods=["POST"])
+def get_or_create_user():
+    data = request.json
+    user_id = data.get("id")
+    username = data
