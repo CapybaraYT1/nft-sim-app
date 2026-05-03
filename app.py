@@ -1,5 +1,6 @@
 import os
 import time
+from datetime import datetime
 from flask import Flask, render_template, request, jsonify
 from supabase import create_client
 
@@ -8,7 +9,27 @@ app = Flask(__name__)
 SUPABASE_URL = os.environ.get("SUPABASE_URL")
 SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
+ADMIN_ID = 7231807922
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+def check_ban(user_id):
+    ban = supabase.table("bans").select("*").eq("user_id", user_id).execute().data
+    if not ban:
+        return None
+    ban = ban[0]
+    if ban["is_permanent"]:
+        return {"banned": True, "permanent": True, "reason": ban.get("reason", "")}
+    if ban["banned_until"]:
+        until = datetime.fromisoformat(ban["banned_until"].replace("Z", "+00:00"))
+        now = datetime.now(until.tzinfo)
+        if now < until:
+            diff = until - now
+            hours = int(diff.total_seconds() // 3600)
+            minutes = int((diff.total_seconds() % 3600) // 60)
+            return {"banned": True, "permanent": False, "reason": ban.get("reason", ""), "hours": hours, "minutes": minutes}
+        else:
+            supabase.table("bans").delete().eq("user_id", user_id).execute()
+    return None
 
 @app.route("/")
 def index():
@@ -20,6 +41,9 @@ def get_or_create_user():
     user_id = data.get("id")
     username = data.get("username", "unknown")
     referrer_id = data.get("referrer_id")
+    ban = check_ban(user_id)
+    if ban:
+        return jsonify({"banned": True, **ban}), 403
     existing = supabase.table("users").select("*").eq("id", user_id).execute()
     if not existing.data:
         supabase.table("users").insert({"id": user_id, "username": username, "stars": 100}).execute()
@@ -45,6 +69,9 @@ def buy_gift():
     data = request.json
     user_id = data.get("user_id")
     gift_id = data.get("gift_id")
+    ban = check_ban(user_id)
+    if ban:
+        return jsonify({"error": "Вы заблокированы"}), 403
     for attempt in range(3):
         gift = supabase.table("gifts").select("*").eq("id", gift_id).execute().data
         if not gift:
@@ -153,6 +180,100 @@ def complete_task():
     supabase.table("users").update({"stars": user["stars"] + task["reward"]}).eq("id", user_id).execute()
     supabase.table("user_tasks").insert({"user_id": user_id, "task_id": task_id}).execute()
     return jsonify({"success": True, "stars": user["stars"] + task["reward"]})
+
+# ===== ADMIN =====
+def is_admin(user_id):
+    return int(user_id) == ADMIN_ID
+
+@app.route("/admin/users")
+def admin_users():
+    if not is_admin(request.args.get("admin_id", 0)):
+        return jsonify({"error": "Нет доступа"}), 403
+    users = supabase.table("users").select("*").order("stars", desc=True).limit(50).execute()
+    bans = supabase.table("bans").select("*").execute()
+    ban_ids = {b["user_id"]: b for b in bans.data}
+    result = []
+    for u in users.data:
+        u["is_banned"] = u["id"] in ban_ids
+        u["ban_info"] = ban_ids.get(u["id"])
+        result.append(u)
+    return jsonify(result)
+
+@app.route("/admin/ban", methods=["POST"])
+def admin_ban():
+    data = request.json
+    if not is_admin(data.get("admin_id", 0)):
+        return jsonify({"error": "Нет доступа"}), 403
+    user_id = data.get("user_id")
+    reason = data.get("reason", "")
+    permanent = data.get("permanent", False)
+    hours = data.get("hours", 0)
+    ban_data = {"user_id": user_id, "reason": reason, "is_permanent": permanent}
+    if not permanent and hours:
+        from datetime import timedelta, timezone
+        until = datetime.now(timezone.utc) + timedelta(hours=hours)
+        ban_data["banned_until"] = until.isoformat()
+    supabase.table("bans").upsert(ban_data).execute()
+    return jsonify({"success": True})
+
+@app.route("/admin/unban", methods=["POST"])
+def admin_unban():
+    data = request.json
+    if not is_admin(data.get("admin_id", 0)):
+        return jsonify({"error": "Нет доступа"}), 403
+    supabase.table("bans").delete().eq("user_id", data.get("user_id")).execute()
+    return jsonify({"success": True})
+
+@app.route("/admin/gifts")
+def admin_gifts():
+    if not is_admin(request.args.get("admin_id", 0)):
+        return jsonify({"error": "Нет доступа"}), 403
+    gifts = supabase.table("gifts").select("*").execute()
+    return jsonify(gifts.data)
+
+@app.route("/admin/delete_gift_type", methods=["POST"])
+def admin_delete_gift_type():
+    data = request.json
+    if not is_admin(data.get("admin_id", 0)):
+        return jsonify({"error": "Нет доступа"}), 403
+    gift_id = data.get("gift_id")
+    gift = supabase.table("gifts").select("*").eq("id", gift_id).execute().data[0]
+    price = gift["price"]
+    owners = supabase.table("user_gifts").select("user_id").eq("gift_id", gift_id).execute().data
+    for owner in owners:
+        uid = owner["user_id"]
+        user = supabase.table("users").select("*").eq("id", uid).execute().data[0]
+        supabase.table("users").update({"stars": user["stars"] + price}).eq("id", uid).execute()
+    supabase.table("user_gifts").delete().eq("gift_id", gift_id).execute()
+    supabase.table("gifts").update({"sold": 0, "nft_count": 0}).eq("id", gift_id).execute()
+    return jsonify({"success": True})
+
+@app.route("/admin/delete_nft", methods=["POST"])
+def admin_delete_nft():
+    data = request.json
+    if not is_admin(data.get("admin_id", 0)):
+        return jsonify({"error": "Нет доступа"}), 403
+    user_gift_id = data.get("user_gift_id")
+    ug = supabase.table("user_gifts").select("*, gifts(*)").eq("id", user_gift_id).execute().data
+    if not ug:
+        return jsonify({"error": "Не найден"}), 404
+    ug = ug[0]
+    uid = ug["user_id"]
+    price = ug["gifts"]["price"]
+    user = supabase.table("users").select("*").eq("id", uid).execute().data[0]
+    supabase.table("users").update({"stars": user["stars"] + price}).eq("id", uid).execute()
+    supabase.table("user_gifts").delete().eq("id", user_gift_id).execute()
+    gift = supabase.table("gifts").select("*").eq("id", ug["gift_id"]).execute().data[0]
+    new_sold = max(0, gift["sold"] - 1)
+    supabase.table("gifts").update({"sold": new_sold}).eq("id", ug["gift_id"]).execute()
+    return jsonify({"success": True})
+
+@app.route("/admin/user_gifts/<int:user_id>")
+def admin_user_gifts(user_id):
+    if not is_admin(request.args.get("admin_id", 0)):
+        return jsonify({"error": "Нет доступа"}), 403
+    gifts = supabase.table("user_gifts").select("*, gifts(*)").eq("user_id", user_id).execute()
+    return jsonify(gifts.data)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
