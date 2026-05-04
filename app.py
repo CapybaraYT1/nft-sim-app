@@ -532,7 +532,6 @@ if __name__ == "__main__":
     {"name": "Rosewood", "color": "B17573", "chance": 1.5},
     {"name": "Sapphire", "color": "58A4C8", "chance": 1.5},
     {"name": "Tactical Pine", "color": "3F7C6B", "chance": 1.5},
-]
 
 # МОДЕЛИ ПО ПОДАРКАМ
 GIFT_MODELS = {
