@@ -1,5 +1,6 @@
 import os
 import time
+import random
 from datetime import datetime
 from flask import Flask, render_template, request, jsonify
 from supabase import create_client
@@ -11,6 +12,177 @@ SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
 ADMIN_ID = 7231807922
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+# ФОНЫ
+BACKGROUNDS = [
+    {"name": "Azure Blue", "color": "5CB0CA", "chance": 1.0},
+    {"name": "Battleship Grey", "color": "8B8B83", "chance": 1.0},
+    {"name": "Caramel", "color": "CF9831", "chance": 1.0},
+    {"name": "Carmine", "color": "E05649", "chance": 1.0},
+    {"name": "Fandango", "color": "E089B4", "chance": 1.0},
+    {"name": "French Blue", "color": "5C9BC4", "chance": 1.0},
+    {"name": "Gunmetal", "color": "4C5D64", "chance": 1.0},
+    {"name": "Jade Green", "color": "55C39C", "chance": 1.0},
+    {"name": "Lavender", "color": "B788E4", "chance": 1.0},
+    {"name": "Mexican Pink", "color": "E36692", "chance": 1.0},
+    {"name": "Navy Blue", "color": "6C9EDD", "chance": 1.0},
+    {"name": "Onyx Black", "color": "4D5255", "chance": 1.0},
+    {"name": "Pacific Cyan", "color": "5ABEA6", "chance": 1.0},
+    {"name": "Pure Gold", "color": "CBAA3F", "chance": 1.0},
+    {"name": "Ranger Green", "color": "5E7849", "chance": 1.0},
+    {"name": "Raspberry", "color": "E07A85", "chance": 1.0},
+    {"name": "Rifle Green", "color": "64685A", "chance": 1.0},
+    {"name": "Satin Gold", "color": "BF9B47", "chance": 1.0},
+    {"name": "Shamrock Green", "color": "8AB063", "chance": 1.0},
+    {"name": "Silver Blue", "color": "80A5B8", "chance": 1.0},
+    {"name": "Sky Blue", "color": "58B4C9", "chance": 1.0},
+    {"name": "Strawberry", "color": "DD8E6F", "chance": 1.0},
+    {"name": "Amber", "color": "D9B344", "chance": 1.2},
+    {"name": "Black", "color": "2E2F31", "chance": 1.2},
+    {"name": "Camo Green", "color": "75944E", "chance": 1.2},
+    {"name": "Cappuccino", "color": "B1907D", "chance": 1.2},
+    {"name": "Carrot Juice", "color": "DA9866", "chance": 1.2},
+    {"name": "Chocolate", "color": "A56E59", "chance": 1.2},
+    {"name": "Dark Green", "color": "526341", "chance": 1.2},
+    {"name": "Deep Cyan", "color": "31B5AA", "chance": 1.2},
+    {"name": "Electric Indigo", "color": "A880F3", "chance": 1.2},
+    {"name": "Feldgrau", "color": "889289", "chance": 1.2},
+    {"name": "Fire Engine", "color": "F15F50", "chance": 1.2},
+    {"name": "French Violet", "color": "C261E6", "chance": 1.2},
+    {"name": "Gunship Green", "color": "568A64", "chance": 1.2},
+    {"name": "Hunter Green", "color": "90AE78", "chance": 1.2},
+    {"name": "Indigo Dye", "color": "537990", "chance": 1.2},
+    {"name": "Ivory White", "color": "BAB7B2", "chance": 1.2},
+    {"name": "Lemongrass", "color": "AEB75A", "chance": 1.2},
+    {"name": "Moonstone", "color": "7DB0B3", "chance": 1.2},
+    {"name": "Mystic Pearl", "color": "D08B6C", "chance": 1.2},
+    {"name": "Neon Blue", "color": "7496F8", "chance": 1.2},
+    {"name": "Old Gold", "color": "B58D38", "chance": 1.2},
+    {"name": "Orange", "color": "E5A659", "chance": 1.2},
+    {"name": "Pacific Green", "color": "6FC794", "chance": 1.2},
+    {"name": "Persimmon", "color": "DA8F5B", "chance": 1.2},
+    {"name": "Platinum", "color": "B2ADA7", "chance": 1.2},
+    {"name": "Purple", "color": "AD6AAD", "chance": 1.2},
+    {"name": "Seal Brown", "color": "654C45", "chance": 1.2},
+    {"name": "Steel Grey", "color": "959FA9", "chance": 1.2},
+    {"name": "Tomato", "color": "E5783E", "chance": 1.2},
+    {"name": "Turquoise", "color": "61B196", "chance": 1.2},
+    {"name": "Aquamarine", "color": "53AEA3", "chance": 1.5},
+    {"name": "Burgundy", "color": "9E5B64", "chance": 1.5},
+    {"name": "Burnt Sienna", "color": "D76F3C", "chance": 1.5},
+    {"name": "Celtic Blue", "color": "45B8EE", "chance": 1.5},
+    {"name": "Chestnut", "color": "BF6F54", "chance": 1.5},
+    {"name": "Cobalt Blue", "color": "6088CE", "chance": 1.5},
+    {"name": "Copper", "color": "D08657", "chance": 1.5},
+    {"name": "Coral Red", "color": "DA886B", "chance": 1.5},
+    {"name": "Cyberpunk", "color": "8485EC", "chance": 1.5},
+    {"name": "Dark Lilac", "color": "B17DA4", "chance": 1.5},
+    {"name": "Desert Sand", "color": "B3A082", "chance": 1.5},
+    {"name": "Electric Purple", "color": "C770C6", "chance": 1.5},
+    {"name": "Emerald", "color": "79C585", "chance": 1.5},
+    {"name": "English Violet", "color": "B186BB", "chance": 1.5},
+    {"name": "Grape", "color": "9D74C2", "chance": 1.5},
+    {"name": "Khaki Green", "color": "A0A66A", "chance": 1.5},
+    {"name": "Light Olive", "color": "BBA95F", "chance": 1.5},
+    {"name": "Malachite", "color": "8FB256", "chance": 1.5},
+    {"name": "Marine Blue", "color": "4D679A", "chance": 1.5},
+    {"name": "Midnight Blue", "color": "505C77", "chance": 1.5},
+    {"name": "Mint Green", "color": "7ECC81", "chance": 1.5},
+    {"name": "Mustard", "color": "D3980C", "chance": 1.5},
+    {"name": "Pine Green", "color": "629E78", "chance": 1.5},
+    {"name": "Pistachio", "color": "7C9A66", "chance": 1.5},
+    {"name": "Roman Silver", "color": "9EA4B0", "chance": 1.5},
+    {"name": "Rosewood", "color": "B17573", "chance": 1.5},
+    {"name": "Sapphire", "color": "58A4C8", "chance": 1.5},
+    {"name": "Tactical Pine", "color": "3F7C6B", "chance": 1.5},
+]
+
+# МОДЕЛИ ПО ПОДАРКАМ
+GIFT_MODELS = {
+    "Easter Egg": [
+        {"name": "Purple Bird", "url": "https://ibb.co/MkJ428kC", "chance": 2.5},
+        {"name": "Protein Lamp", "url": "https://ibb.co/v6PgbsGH", "chance": 2.5},
+        {"name": "Porcelain", "url": "https://ibb.co/FQ9L032", "chance": 2.5},
+        {"name": "Mr. Benedict", "url": "https://ibb.co/QFst1gzL", "chance": 2.5},
+        {"name": "Moon Watch", "url": "https://ibb.co/5Ww91HqL", "chance": 2.5},
+        {"name": "Meadow", "url": "https://ibb.co/jkX9vJjT", "chance": 2.5},
+        {"name": "Matryoshka", "url": "https://ibb.co/sJFqsm5D", "chance": 2.5},
+        {"name": "Khokhloma", "url": "https://ibb.co/5XxL9hQ4", "chance": 2.5},
+        {"name": "Gzhel", "url": "https://ibb.co/L4WxxJG", "chance": 2.5},
+        {"name": "Frosted", "url": "https://ibb.co/rKKCHtb8", "chance": 2.5},
+        {"name": "Flowers", "url": "https://ibb.co/p6tSTWjG", "chance": 2.5},
+        {"name": "Flower Bed", "url": "https://ibb.co/KjPBprCy", "chance": 2.5},
+        {"name": "Crown Prince", "url": "https://ibb.co/mrPRrwxZ", "chance": 2.5},
+        {"name": "Bronze", "url": "https://ibb.co/TDjKSHg9", "chance": 2.5},
+        {"name": "Brick Wall", "url": "https://ibb.co/wNM8YnJ0", "chance": 2.5},
+        {"name": "Ball of Steel", "url": "https://ibb.co/Q7F1hWdx", "chance": 2.5},
+        {"name": "3D Render", "url": "https://ibb.co/bqJ5X3m", "chance": 2.5},
+        {"name": "Stamper", "url": "https://ibb.co/PZbw1Qv3", "chance": 2.0},
+        {"name": "Scrambull", "url": "https://ibb.co/Df4WStCr", "chance": 2.0},
+        {"name": "Omeletron", "url": "https://ibb.co/Kj2F70Kf", "chance": 2.0},
+        {"name": "OS Shell", "url": "https://ibb.co/N6tKZfLL", "chance": 2.0},
+        {"name": "Magic Key", "url": "https://ibb.co/Lz1xKkK2", "chance": 2.0},
+        {"name": "Ladybird", "url": "https://ibb.co/k2HCtD76", "chance": 2.0},
+        {"name": "Jupiter", "url": "https://ibb.co/60x253bp", "chance": 2.0},
+        {"name": "Free Flight", "url": "https://ibb.co/8Lh2s9Qs", "chance": 2.0},
+        {"name": "Fish Pod", "url": "https://ibb.co/Wpf0WkP4", "chance": 2.0},
+        {"name": "Fine Silver", "url": "https://ibb.co/FLbM1PpS", "chance": 2.0},
+        {"name": "Eggsecutive", "url": "https://ibb.co/YFnGsDKR", "chance": 2.0},
+        {"name": "Eggburger", "url": "https://ibb.co/zWH2KPL3", "chance": 2.0},
+        {"name": "Creeper", "url": "https://ibb.co/VW1pFzcT", "chance": 2.0},
+        {"name": "Chicken", "url": "https://ibb.co/b5b9knXX", "chance": 2.0},
+        {"name": "Boiled Pepe", "url": "https://ibb.co/zVvCD9Pc", "chance": 2.0},
+        {"name": "Treasure Map", "url": "https://ibb.co/k2rq5kzr", "chance": 1.5},
+        {"name": "Stained Glass", "url": "https://ibb.co/n8g1BNLr", "chance": 1.5},
+        {"name": "Pure Gold", "url": "https://ibb.co/0yb59ZDn", "chance": 1.5},
+        {"name": "Ice Cream", "url": "https://ibb.co/rKxJKp4n", "chance": 1.5},
+        {"name": "Foliage", "url": "https://ibb.co/M5Dz3MNx", "chance": 1.5},
+        {"name": "Eggmoji", "url": "https://ibb.co/Mx9fnDH4", "chance": 1.5},
+        {"name": "Dragon", "url": "https://ibb.co/pjCGrVfS", "chance": 1.0},
+        {"name": "Starry Gift", "url": "https://ibb.co/3Y9cWMwR", "chance": 1.0},
+        {"name": "Pearl", "url": "https://ibb.co/q3N5Kj0r", "chance": 1.0},
+        {"name": "Pastel Candy", "url": "https://ibb.co/Sw5khpqh", "chance": 1.0},
+        {"name": "Meowling", "url": "https://ibb.co/CK8vY5ym", "chance": 1.0},
+        {"name": "Koshchei", "url": "https://ibb.co/7Nz1ZTK8", "chance": 1.0},
+        {"name": "Faberge", "url": "https://ibb.co/C34c3Y3k", "chance": 1.0},
+        {"name": "Egghead", "url": "https://ibb.co/zVmfmP22", "chance": 1.0},
+        {"name": "Dogel Mogel", "url": "https://ibb.co/ymtRgdZP", "chance": 1.0},
+        {"name": "Deep Freeze", "url": "https://ibb.co/4nxTTFw7", "chance": 1.0},
+        {"name": "Chocolate", "url": "https://ibb.co/WWprCDfL", "chance": 1.0},
+        {"name": "Cactus", "url": "https://ibb.co/k668x15W", "chance": 1.0},
+        {"name": "Unicorn", "url": "https://ibb.co/NnKtYk2L", "chance": 0.5},
+        {"name": "Sea Turtle", "url": "https://ibb.co/23sryd4S", "chance": 0.5},
+        {"name": "Red Whelp", "url": "https://ibb.co/B5W96Fcv", "chance": 0.5},
+        {"name": "Little Doge", "url": "https://ibb.co/xSQHZP3g", "chance": 0.5},
+        {"name": "Little Dino", "url": "https://ibb.co/nskzb3vr", "chance": 0.5},
+        {"name": "Jurassic", "url": "https://ibb.co/rKLgsjTj", "chance": 0.5},
+        {"name": "Easter Bunny", "url": "https://ibb.co/84MS4KkN", "chance": 0.5},
+        {"name": "Early Bird", "url": "https://ibb.co/QvwBygV2", "chance": 0.5},
+        {"name": "Cryptid", "url": "https://ibb.co/pv8YnwVQ", "chance": 0.5},
+        {"name": "Choco Bunny", "url": "https://ibb.co/9k5BVnNJ", "chance": 0.5},
+        {"name": "Baby Turtle", "url": "https://ibb.co/DHC167YM", "chance": 0.5},
+        {"name": "Baby Chick", "url": "https://ibb.co/mr1CtvzB", "chance": 0.5},
+    ]
+}
+
+def weighted_choice(items):
+    total = sum(i["chance"] for i in items)
+    r = random.uniform(0, total)
+    cumulative = 0
+    for item in items:
+        cumulative += item["chance"]
+        if r <= cumulative:
+            return item
+    return items[-1]
+
+def get_direct_url(ibb_url):
+    # Конвертируем ibb.co ссылку в прямую ссылку i.ibb.co
+    if "ibb.co/" in ibb_url and not ibb_url.startswith("https://i."):
+        parts = ibb_url.rstrip("/").split("/")
+        code = parts[-1]
+        name = parts[-2] if len(parts) > 1 else code
+        return f"https://i.ibb.co/{code}/{name}.png"
+    return ibb_url
 
 def check_ban(user_id):
     ban = supabase.table("bans").select("*").eq("user_id", user_id).execute().data
@@ -117,16 +289,46 @@ def upgrade_gift():
     if not ug or ug[0]["is_upgraded"]:
         return jsonify({"error": "Уже улучшен"}), 400
     ug = ug[0]
+    gift = supabase.table("gifts").select("*").eq("id", ug["gift_id"]).execute().data[0]
+    gift_name = gift["name"]
+    models = GIFT_MODELS.get(gift_name, [])
+    if not models:
+        return jsonify({"error": "Модели не найдены"}), 400
+    chosen_model = weighted_choice(models)
+    chosen_bg = weighted_choice(BACKGROUNDS)
     for attempt in range(3):
-        gift = supabase.table("gifts").select("*").eq("id", ug["gift_id"]).execute().data[0]
         current_nft = gift.get("nft_count", 0)
         new_nft = current_nft + 1
         result = supabase.table("gifts").update({"nft_count": new_nft}).eq("id", ug["gift_id"]).eq("nft_count", current_nft).execute()
         if result.data:
             supabase.table("users").update({"stars": user["stars"] - 25}).eq("id", user_id).execute()
-            supabase.table("user_gifts").update({"is_upgraded": True, "nft_number": new_nft}).eq("id", user_gift_id).execute()
+            supabase.table("user_gifts").update({
+                "is_upgraded": True,
+                "nft_number": new_nft,
+                "model_name": chosen_model["name"],
+                "model_url": chosen_model["url"],
+                "model_chance": chosen_model["chance"],
+                "bg_name": chosen_bg["name"],
+                "bg_color": chosen_bg["color"],
+                "bg_chance": chosen_bg["chance"],
+            }).eq("id", user_gift_id).execute()
             user_updated = supabase.table("users").select("*").eq("id", user_id).execute().data[0]
-            return jsonify({"success": True, "nft_number": new_nft, "stars": user_updated["stars"]})
+            ug_updated = supabase.table("user_gifts").select("*, gifts(*)").eq("id", user_gift_id).execute().data[0]
+            return jsonify({
+                "success": True,
+                "nft_number": new_nft,
+                "stars": user_updated["stars"],
+                "model_name": chosen_model["name"],
+                "model_url": chosen_model["url"],
+                "model_chance": chosen_model["chance"],
+                "bg_name": chosen_bg["name"],
+                "bg_color": "#" + chosen_bg["color"],
+                "bg_chance": chosen_bg["chance"],
+                "gift_name": gift_name,
+                "nft_count": new_nft,
+                "total_sold": gift["sold"],
+                "username": user["username"],
+            })
         else:
             time.sleep(0.1)
     return jsonify({"error": "Попробуйте снова"}), 409
@@ -181,7 +383,6 @@ def complete_task():
     supabase.table("user_tasks").insert({"user_id": user_id, "task_id": task_id}).execute()
     return jsonify({"success": True, "stars": user["stars"] + task["reward"]})
 
-# ===== ADMIN =====
 def is_admin(user_id):
     return int(user_id) == ADMIN_ID
 
