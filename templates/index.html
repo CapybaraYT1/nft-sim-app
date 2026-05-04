@@ -13,35 +13,35 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
 #loader{position:fixed;inset:0;background:#0a0a0f;z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity 0.5s ease}
 #loader.hidden{opacity:0;pointer-events:none}
 .loader-icon{font-size:60px;animation:pulse 1.2s ease-in-out infinite}
-.loader-title{font-size:24px;font-weight:800;letter-spacing:-0.5px}
+.loader-title{font-size:24px;font-weight:800;letter-spacing:-0.5px;background:linear-gradient(135deg,#f59e0b,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .loader-bar{width:140px;height:3px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden}
-.loader-fill{height:100%;background:linear-gradient(90deg,#7c3aed,#4f46e5);border-radius:2px;animation:load 1.4s ease forwards}
+.loader-fill{height:100%;background:linear-gradient(90deg,#f59e0b,#f97316);border-radius:2px;animation:load 1.4s ease forwards}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
 @keyframes load{0%{width:0}100%{width:100%}}
 
 #ban-screen{display:none;position:fixed;inset:0;background:#0a0a0f;z-index:998;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px}
 #ban-screen.show{display:flex}
 
-.header{padding:14px 20px 10px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,15,0.97);backdrop-filter:blur(20px);position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(255,255,255,0.05)}
+.header{padding:14px 20px 10px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,15,0.97);backdrop-filter:blur(20px);position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(245,158,11,0.15)}
 .logo-wrap{display:flex;align-items:center;gap:10px}
-.logo-icon{width:34px;height:34px;background:linear-gradient(135deg,#7c3aed,#4f46e5);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px}
+.logo-icon{width:34px;height:34px;background:linear-gradient(135deg,#f59e0b,#f97316);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px}
 .logo-text{font-size:17px;font-weight:800;letter-spacing:-0.3px}
-.stars-pill{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);padding:7px 14px;border-radius:20px;font-size:14px;font-weight:700;display:flex;align-items:center;gap:5px}
+.stars-pill{background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.3);padding:7px 14px;border-radius:20px;font-size:14px;font-weight:700;color:#f59e0b;display:flex;align-items:center;gap:5px}
 
 .page{display:none;min-height:calc(100vh - 120px);padding-bottom:90px}
 .page.active{display:block;animation:fadeIn 0.2s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
 .hero{margin:14px 16px;border-radius:20px;padding:22px 20px;text-align:center}
-.hero-gifts{background:linear-gradient(135deg,rgba(124,58,237,0.22),rgba(79,70,229,0.12));border:1px solid rgba(124,58,237,0.18)}
-.hero-tasks{background:linear-gradient(135deg,rgba(245,158,11,0.18),rgba(239,68,68,0.1));border:1px solid rgba(245,158,11,0.18)}
-.hero-market{background:linear-gradient(135deg,rgba(16,185,129,0.16),rgba(6,182,212,0.1));border:1px solid rgba(16,185,129,0.18)}
+.hero-gifts{background:linear-gradient(135deg,rgba(245,158,11,0.18),rgba(249,115,22,0.1));border:1px solid rgba(245,158,11,0.2)}
+.hero-tasks{background:linear-gradient(135deg,rgba(245,158,11,0.18),rgba(234,88,12,0.12));border:1px solid rgba(245,158,11,0.2)}
+.hero-market{background:linear-gradient(135deg,rgba(249,115,22,0.16),rgba(245,158,11,0.1));border:1px solid rgba(249,115,22,0.2)}
 .hero-icon{font-size:44px;display:block;margin-bottom:10px}
 .hero-title{font-size:20px;font-weight:800;margin-bottom:6px}
 .hero-sub{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.5}
 
 .gifts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 16px}
-.gift-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:14px 8px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:transform 0.18s ease;text-align:center}
+.gift-card{background:rgba(255,255,255,0.04);border:1px solid rgba(245,158,11,0.12);border-radius:16px;padding:14px 8px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:transform 0.18s ease;text-align:center}
 .gift-card:active{transform:scale(0.93)}
 .gift-card.sold-out{opacity:0.28;pointer-events:none}
 .g-emoji{font-size:42px;line-height:1}
@@ -49,23 +49,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
 .g-price{font-size:12px;font-weight:700;color:#f59e0b}
 
 .tasks-list{padding:0 16px;display:flex;flex-direction:column;gap:8px}
-.task-row{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px}
+.task-row{background:rgba(255,255,255,0.04);border:1px solid rgba(245,158,11,0.1);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px}
 .task-row.done{opacity:0.4}
-.t-icon{width:42px;height:42px;border-radius:11px;background:rgba(124,58,237,0.15);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.t-icon{width:42px;height:42px;border-radius:11px;background:rgba(245,158,11,0.12);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
 .t-body{flex:1}
 .t-name{font-size:14px;font-weight:600;margin-bottom:2px}
 .t-reward{font-size:12px;color:#f59e0b;font-weight:600}
-.t-btn{flex-shrink:0;background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;border:none;border-radius:10px;padding:8px 13px;font-size:12px;font-weight:700;cursor:pointer;transition:transform 0.15s}
+.t-btn{flex-shrink:0;background:linear-gradient(135deg,#f59e0b,#f97316);color:#000;border:none;border-radius:10px;padding:8px 13px;font-size:12px;font-weight:700;cursor:pointer;transition:transform 0.15s}
 .t-btn:active{transform:scale(0.92)}
 .t-btn:disabled{opacity:0.4;cursor:not-allowed}
 .t-done{font-size:18px;flex-shrink:0}
 
 .market-empty{text-align:center;padding:50px 20px;color:rgba(255,255,255,0.2);font-size:14px;line-height:1.9}
 
-.profile-top{margin:14px 16px;border-radius:20px;overflow:hidden;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07)}
-.profile-bg{height:70px;background:linear-gradient(135deg,#7c3aed,#4f46e5,#0ea5e9)}
+.profile-top{margin:14px 16px;border-radius:20px;overflow:hidden;background:rgba(255,255,255,0.04);border:1px solid rgba(245,158,11,0.12)}
+.profile-bg{height:70px;background:linear-gradient(135deg,#f59e0b,#f97316,#ea580c)}
 .profile-body{padding:0 20px 20px;display:flex;flex-direction:column;align-items:center;text-align:center}
-.p-avatar{width:72px;height:72px;border-radius:50%;border:3px solid #0a0a0f;overflow:hidden;margin-top:-36px;margin-bottom:10px;background:linear-gradient(135deg,#7c3aed,#4f46e5);display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0}
+.p-avatar{width:72px;height:72px;border-radius:50%;border:3px solid #0a0a0f;overflow:hidden;margin-top:-36px;margin-bottom:10px;background:linear-gradient(135deg,#f59e0b,#f97316);display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0}
 .p-avatar img{width:100%;height:100%;object-fit:cover;display:none}
 .p-name{font-size:20px;font-weight:800;letter-spacing:-0.3px;margin-bottom:3px}
 .p-username{font-size:13px;color:rgba(255,255,255,0.35)}
@@ -73,30 +73,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
 
 .owned-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 16px 16px}
 .owned-card{border-radius:16px;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;cursor:pointer;transition:transform 0.18s;padding:8px;gap:4px}
-.owned-card.normal{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08)}
+.owned-card.normal{background:rgba(255,255,255,0.05);border:1px solid rgba(245,158,11,0.12)}
 .owned-card.upgraded{border:none}
 .owned-card:active{transform:scale(0.92)}
 .owned-emoji{font-size:38px}
-.owned-model-img{width:75%;height:75%;object-fit:contain;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
-.owned-price{background:rgba(0,0,0,0.3);border-radius:7px;padding:2px 7px;font-size:9px;font-weight:700;color:rgba(255,255,255,0.7);position:absolute;bottom:6px}
-.nft-tag{position:absolute;top:6px;left:6px;background:rgba(0,0,0,0.5);border-radius:6px;padding:2px 6px;font-size:8px;font-weight:800;color:#fff;backdrop-filter:blur(4px)}
+.owned-model-img{width:80%;height:80%;object-fit:contain;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.nft-tag{position:absolute;top:6px;right:6px;background:rgba(0,0,0,0.55);border-radius:6px;padding:2px 6px;font-size:8px;font-weight:800;color:#f59e0b;backdrop-filter:blur(4px)}
 .empty-p{text-align:center;padding:40px 20px;color:rgba(255,255,255,0.2);font-size:14px;line-height:1.7}
 
-.tab-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,15,0.97);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;padding:8px 8px calc(8px + env(safe-area-inset-bottom));z-index:50}
+.tab-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,15,0.97);backdrop-filter:blur(20px);border-top:1px solid rgba(245,158,11,0.15);display:flex;align-items:center;padding:8px 8px calc(8px + env(safe-area-inset-bottom));z-index:50}
 .tab-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:7px 2px;cursor:pointer;color:rgba(255,255,255,0.25);border:none;background:transparent;border-radius:12px;transition:color 0.2s,background 0.2s;gap:3px}
-.tab-item.active{color:#a78bfa;background:rgba(124,58,237,0.1)}
+.tab-item.active{color:#f59e0b;background:rgba(245,158,11,0.1)}
 .tab-icon{font-size:20px;transition:transform 0.2s}
 .tab-item.active .tab-icon{transform:scale(1.12)}
 .tab-label{font-size:9px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase}
-.tab-av-wrap{width:26px;height:26px;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,#7c3aed,#4f46e5);display:flex;align-items:center;justify-content:center;font-size:12px;border:2px solid transparent;transition:border-color 0.2s}
-.tab-item.active .tab-av-wrap{border-color:#a78bfa}
+.tab-av-wrap{width:26px;height:26px;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,#f59e0b,#f97316);display:flex;align-items:center;justify-content:center;font-size:12px;border:2px solid transparent;transition:border-color 0.2s}
+.tab-item.active .tab-av-wrap{border-color:#f59e0b}
 .tab-av-wrap img{width:100%;height:100%;object-fit:cover;display:none}
 
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(12px);z-index:100;align-items:flex-end}
 .overlay.open{display:flex}
 .sheet{background:#111118;border-radius:24px 24px 0 0;padding:20px 20px 44px;width:100%;position:relative;max-height:88vh;overflow-y:auto}
-.close-x{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.09);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;color:rgba(255,255,255,0.55);transition:background 0.15s}
-.close-x:active{background:rgba(255,255,255,0.18)}
+.close-x{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.09);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;color:rgba(255,255,255,0.6);transition:background 0.15s;z-index:10}
+.close-x:active{background:rgba(255,255,255,0.2)}
 .sheet-emoji{font-size:68px;text-align:center;display:block;margin:8px 0 12px}
 .sheet-title{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px;letter-spacing:-0.3px}
 .sheet-sub{font-size:13px;color:rgba(255,255,255,0.35);text-align:center;margin-bottom:16px}
@@ -107,65 +106,57 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
 .btn-m{width:100%;padding:15px;border:none;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;transition:transform 0.15s;margin-top:8px}
 .btn-m:active{transform:scale(0.97)}
 .btn-m:disabled{opacity:0.4;cursor:not-allowed}
-.btn-purple{background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff}
-.btn-gold{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff}
+.btn-gold{background:linear-gradient(135deg,#f59e0b,#f97316);color:#000}
 .btn-red{background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff}
 .btn-ghost{background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.4);border:none}
 
 .conf-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(12px);z-index:200;align-items:center;justify-content:center;padding:20px}
 .conf-overlay.open{display:flex}
-.conf-box{background:#111118;border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:26px 20px;width:100%;max-width:320px;text-align:center}
+.conf-box{background:#111118;border:1px solid rgba(245,158,11,0.15);border-radius:20px;padding:26px 20px;width:100%;max-width:320px;text-align:center}
 .conf-icon{font-size:48px;margin-bottom:12px}
 .conf-title{font-size:18px;font-weight:800;margin-bottom:6px}
 .conf-sub{font-size:13px;color:rgba(255,255,255,0.38);margin-bottom:22px;line-height:1.5}
 
-/* NFT GENERATION */
-#gen-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);backdrop-filter:blur(16px);z-index:300;align-items:center;justify-content:center;flex-direction:column;gap:24px}
+#gen-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.93);backdrop-filter:blur(16px);z-index:300;align-items:center;justify-content:center;flex-direction:column;gap:24px}
 #gen-overlay.show{display:flex}
-.gen-box{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:36px 40px;text-align:center;position:relative;overflow:hidden}
-.gen-box::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,58,237,0.1),rgba(79,70,229,0.05));pointer-events:none}
-.gen-spinner{width:56px;height:56px;border:3px solid rgba(255,255,255,0.08);border-top:3px solid #7c3aed;border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 20px}
+.gen-box{background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);border-radius:24px;padding:36px 48px;text-align:center}
+.gen-spinner{width:52px;height:52px;border:3px solid rgba(245,158,11,0.15);border-top:3px solid #f59e0b;border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto 18px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.gen-title{font-size:20px;font-weight:800;margin-bottom:8px;letter-spacing:-0.3px}
-.gen-dots{display:flex;gap:6px;justify-content:center;margin-top:4px}
-.gen-dot{width:6px;height:6px;border-radius:50%;background:#7c3aed;animation:dotPulse 1.2s ease-in-out infinite}
+.gen-title{font-size:19px;font-weight:800;margin-bottom:8px;background:linear-gradient(135deg,#f59e0b,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.gen-dots{display:flex;gap:6px;justify-content:center}
+.gen-dot{width:6px;height:6px;border-radius:50%;background:#f59e0b;animation:dotPulse 1.2s ease-in-out infinite}
 .gen-dot:nth-child(2){animation-delay:0.2s}
 .gen-dot:nth-child(3){animation-delay:0.4s}
-@keyframes dotPulse{0%,100%{opacity:0.3;transform:scale(0.8)}50%{opacity:1;transform:scale(1.2)}}
+@keyframes dotPulse{0%,100%{opacity:0.25;transform:scale(0.8)}50%{opacity:1;transform:scale(1.2)}}
 
-/* NFT CARD */
 #nft-result{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(16px);z-index:301;align-items:flex-end;justify-content:center}
-#nft-result.show{display:flex}
-.nft-card{width:100%;border-radius:28px 28px 0 0;overflow:hidden;position:relative;max-height:90vh}
-.nft-card-bg{width:100%;padding-top:55%;position:relative;display:flex;align-items:center;justify-content:center}
-.nft-card-model{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px}
-.nft-card-model img{max-width:65%;max-height:65%;object-fit:contain;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.4))}
-.nft-close{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,0.4);backdrop-filter:blur(8px);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;color:rgba(255,255,255,0.7);z-index:10}
-.nft-info{background:#111118;padding:20px 20px 40px}
-.nft-name-row{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
-.nft-name{font-size:22px;font-weight:800;letter-spacing:-0.3px}
-.nft-num{font-size:16px;font-weight:700;color:rgba(255,255,255,0.4)}
-.nft-table{margin-top:16px;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.07)}
+#nft-result.show{display:flex;animation:slideUp 0.3s ease}
+@keyframes slideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+.nft-card{width:100%;border-radius:28px 28px 0 0;overflow:hidden;position:relative;max-height:90vh;overflow-y:auto}
+.nft-card-bg{width:100%;padding-top:60%;position:relative}
+.nft-card-model{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px}
+.nft-card-model img{max-width:72%;max-height:72%;object-fit:contain;filter:drop-shadow(0 8px 28px rgba(0,0,0,0.5))}
+.nft-serial{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);border-radius:8px;padding:4px 12px;font-size:13px;font-weight:800;color:#fff;white-space:nowrap}
+.nft-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;color:rgba(255,255,255,0.8);z-index:10}
+.nft-info{background:#111118;padding:18px 20px 36px}
+.nft-name{font-size:22px;font-weight:800;letter-spacing:-0.3px;margin-bottom:14px}
+.nft-table{border-radius:14px;overflow:hidden;border:1px solid rgba(245,158,11,0.12)}
 .nft-row{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,0.05)}
 .nft-row:last-child{border-bottom:none}
 .nft-row-label{font-size:13px;color:rgba(255,255,255,0.38)}
 .nft-row-val{font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px}
-.chance-badge{background:rgba(255,255,255,0.08);border-radius:6px;padding:2px 7px;font-size:11px;color:rgba(255,255,255,0.5);font-weight:600}
-.nft-supply-row{display:flex;justify-content:space-between;align-items:center;padding:12px 14px}
-.nft-supply-left{font-size:13px;color:rgba(255,255,255,0.38)}
-.nft-supply-right{font-size:13px;font-weight:600}
+.chance-badge{background:rgba(245,158,11,0.12);border-radius:6px;padding:2px 7px;font-size:11px;color:#f59e0b;font-weight:600}
 
-/* NFT OWNED CARD */
 .nft-owned-bg{width:100%;padding-top:55%;position:relative}
-.nft-owned-model{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px}
-.nft-owned-model img{max-width:60%;max-height:60%;object-fit:contain;filter:drop-shadow(0 6px 16px rgba(0,0,0,0.4))}
+.nft-owned-model{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:14px}
+.nft-owned-model img{max-width:65%;max-height:65%;object-fit:contain;filter:drop-shadow(0 6px 16px rgba(0,0,0,0.4))}
 
-.admin-section{margin:0 16px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;overflow:hidden}
+.admin-section{margin:0 16px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(245,158,11,0.1);border-radius:16px;overflow:hidden}
 .admin-section-title{padding:14px 16px;font-size:12px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:rgba(255,255,255,0.35);border-bottom:1px solid rgba(255,255,255,0.05)}
 .admin-user-row{padding:14px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:background 0.15s}
 .admin-user-row:last-child{border-bottom:none}
 .admin-user-row:active{background:rgba(255,255,255,0.04)}
-.admin-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#4f46e5);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.admin-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#f97316);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
 .admin-user-info{flex:1}
 .admin-user-name{font-size:14px;font-weight:600}
 .admin-user-meta{font-size:11px;color:rgba(255,255,255,0.35);margin-top:2px}
@@ -177,11 +168,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
 .admin-gift-name{font-size:14px;font-weight:600}
 .admin-gift-meta{font-size:11px;color:rgba(255,255,255,0.35);margin-top:2px}
 .btn-admin-del{background:rgba(239,68,68,0.12);color:#ef4444;border:1px solid rgba(239,68,68,0.25);border-radius:8px;padding:6px 12px;font-size:11px;font-weight:700;cursor:pointer}
-.admin-input{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 14px;color:#fff;font-size:14px;margin-bottom:8px;outline:none}
+.admin-input{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(245,158,11,0.2);border-radius:12px;padding:12px 14px;color:#fff;font-size:14px;margin-bottom:8px;outline:none}
 .admin-input::placeholder{color:rgba(255,255,255,0.25)}
 .admin-radio-row{display:flex;gap:8px;margin-bottom:12px}
 .admin-radio{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.5);font-size:13px;font-weight:600;cursor:pointer;text-align:center;transition:all 0.15s}
-.admin-radio.selected{border-color:#7c3aed;background:rgba(124,58,237,0.15);color:#a78bfa}
+.admin-radio.selected{border-color:#f59e0b;background:rgba(245,158,11,0.12);color:#f59e0b}
 
 .state-msg{text-align:center;padding:50px 20px;color:rgba(255,255,255,0.2);font-size:14px;line-height:1.7}
 </style>
@@ -309,14 +300,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
         </div>
       </div>
     </div>
-    <span class="sheet-emoji" id="o-emoji" style="margin-top:8px"></span>
+    <span class="sheet-emoji" id="o-emoji"></span>
     <div class="sheet-title" id="o-name"></div>
     <div class="info-row" id="o-nft-row" style="display:none"><span class="info-label">NFT #</span><span class="info-val" id="o-nft"></span></div>
     <div class="info-row"><span class="info-label">Цена</span><span class="info-val" id="o-price"></span></div>
-    <div class="info-row"><span class="info-label">Статус</span><span class="info-val" id="o-status"></span></div>
     <div class="info-row" id="o-model-row" style="display:none"><span class="info-label">Модель</span><span class="info-val" id="o-model"></span></div>
     <div class="info-row" id="o-bg-row" style="display:none"><span class="info-label">Фон</span><span class="info-val" id="o-bg"></span></div>
-    <button class="btn-m btn-purple" id="btn-upg-o" onclick="askUpgrade()">✨ Улучшить за 25 ⭐</button>
+    <button class="btn-m btn-gold" id="btn-upg-o" onclick="askUpgrade()">✨ Улучшить за 25 ⭐</button>
     <button class="btn-m btn-red" id="btn-sell-o" onclick="askSell()">💰 Продать</button>
   </div>
 </div>
@@ -327,7 +317,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
     <div class="conf-icon">✨</div>
     <div class="conf-title">Улучшить подарок?</div>
     <div class="conf-sub">Стоимость — <strong>25 ⭐</strong><br>Получите уникальный NFT со случайной моделью и фоном</div>
-    <button class="btn-m btn-purple" onclick="doUpgrade()">Улучшить за 25 ⭐</button>
+    <button class="btn-m btn-gold" onclick="doUpgrade()">Улучшить за 25 ⭐</button>
     <button class="btn-m btn-ghost" onclick="closeConfUpg()">Отмена</button>
   </div>
 </div>
@@ -363,13 +353,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
       <div class="nft-card-model">
         <img id="nft-model-img" src="" alt=""/>
       </div>
+      <div class="nft-serial" id="nft-serial"></div>
     </div>
     <button class="nft-close" onclick="closeNftResult()">✕</button>
     <div class="nft-info">
-      <div class="nft-name-row">
-        <div class="nft-name" id="nft-gift-name"></div>
-        <div class="nft-num" id="nft-num"></div>
-      </div>
+      <div class="nft-name" id="nft-gift-name"></div>
       <div class="nft-table">
         <div class="nft-row">
           <span class="nft-row-label">Владелец</span>
@@ -389,8 +377,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
             <span class="chance-badge" id="nft-bg-chance"></span>
           </span>
         </div>
-        <div class="nft-row" style="border-bottom:none">
-          <span class="nft-row-label">Наличие</span>
+        <div class="nft-row">
+          <span class="nft-row-label">Количество</span>
           <span class="nft-row-val" id="nft-supply"></span>
         </div>
       </div>
@@ -426,12 +414,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
 </div>
 
 <script>
-const tg = window.Telegram.WebApp;
-tg.ready(); tg.expand();
-const ADMIN_ID = 7231807922;
-
-let currentUser=null, selGift=null, selUserGift=null;
-let banType='temp', adminTargetUser=null;
+const tg=window.Telegram.WebApp;
+tg.ready();tg.expand();
+const ADMIN_ID=7231807922;
+let currentUser=null,selGift=null,selUserGift=null;
+let banType='temp',adminTargetUser=null;
 const tgUser=tg.initDataUnsafe?.user;
 const loaded={};
 
@@ -604,12 +591,10 @@ async function loadProfile(){
         return `<div class="owned-card upgraded" style="background:#${g.bg_color}" onclick="openOwned('${enc(g)}')">
           <div class="nft-tag">#${g.nft_number||'?'}</div>
           <img class="owned-model-img" src="${g.model_url}" alt="" onerror="this.style.display='none'"/>
-          <div class="owned-price">⭐ ${g.gifts?.price||0}</div>
         </div>`;
       }
       return `<div class="owned-card normal" onclick="openOwned('${enc(g)}')">
         <div class="owned-emoji">${g.gifts?.emoji||'🎁'}</div>
-        <div class="owned-price">⭐ ${g.gifts?.price||0}</div>
       </div>`;
     }).join('');
   }catch(e){c.innerHTML='<div class="empty-p">Ошибка загрузки</div>';}
@@ -639,7 +624,6 @@ function openOwned(encoded){
   }
   document.getElementById('o-name').textContent=g.gifts?.name||'Подарок';
   document.getElementById('o-price').textContent='⭐ '+(g.gifts?.price||0);
-  document.getElementById('o-status').textContent=g.is_upgraded?'✨ Уникальный NFT':'Обычный';
   const nftRow=document.getElementById('o-nft-row');
   if(g.is_upgraded&&g.nft_number){nftRow.style.display='flex';document.getElementById('o-nft').textContent='#'+g.nft_number;}
   else{nftRow.style.display='none';}
@@ -653,16 +637,14 @@ function askUpgrade(){document.getElementById('conf-upg').classList.add('open');
 function closeConfUpg(){document.getElementById('conf-upg').classList.remove('open');}
 
 async function doUpgrade(){
-  if(!selUserGift||!currentUser){
-    tg.showAlert('Нет данных');return;
-  }
-  const giftToUpgrade = selUserGift;
+  if(!selUserGift||!currentUser){tg.showAlert('Нет данных');return;}
+  const giftToUpgrade=selUserGift;
   closeConfUpg();
   closeOwned();
   document.getElementById('gen-overlay').classList.add('show');
   try{
     const d=await post('/upgrade_gift',{user_id:currentUser.id,user_gift_id:giftToUpgrade.id});
-    await new Promise(r=>setTimeout(r,4000));
+    await new Promise(r=>setTimeout(r,2000));
     document.getElementById('gen-overlay').classList.remove('show');
     if(d.error){tg.showAlert(d.error);return;}
     setStars(d.stars);
@@ -673,17 +655,19 @@ async function doUpgrade(){
     tg.showAlert('Ошибка: '+e.message);
   }
 }
+
 function showNftResult(d){
-  document.getElementById('nft-bg').style.background='#'+d.bg_color.replace('#','');
+  const bgColor=d.bg_color.startsWith('#')?d.bg_color:'#'+d.bg_color;
+  document.getElementById('nft-bg').style.background=bgColor;
   document.getElementById('nft-model-img').src=d.model_url;
+  document.getElementById('nft-serial').textContent='#'+d.nft_number;
   document.getElementById('nft-gift-name').textContent=d.gift_name;
-  document.getElementById('nft-num').textContent='#'+d.nft_number;
-  document.getElementById('nft-owner').textContent='@'+(currentUser.username||'user');
+  document.getElementById('nft-owner').textContent='@'+(currentUser.username||tgUser?.username||'user');
   document.getElementById('nft-model-name').textContent=d.model_name;
   document.getElementById('nft-model-chance').textContent=d.model_chance+'%';
   document.getElementById('nft-bg-name').textContent=d.bg_name;
   document.getElementById('nft-bg-chance').textContent=d.bg_chance+'%';
-  document.getElementById('nft-supply').textContent=d.nft_count+'/'+d.total_sold+' выпущено';
+  document.getElementById('nft-supply').textContent=d.nft_count+'/'+d.available;
   document.getElementById('nft-result').classList.add('show');
 }
 
@@ -767,7 +751,7 @@ function openAdminUser(encoded){
       loaded.admin=false;loadAdmin();
     });
   }else{
-    document.getElementById('ban-user-name').textContent=u.username+' (ID: '+u.id+')';
+    document.getElementById('ban-user-name').textContent=(u.username||'—')+' (ID: '+u.id+')';
     document.getElementById('ban-reason').value='';
     document.getElementById('ban-hours').value='';
     selectBanType('temp');
