@@ -654,14 +654,14 @@ function closeConfUpg(){document.getElementById('conf-upg').classList.remove('op
 
 async function doUpgrade(){
   if(!selUserGift||!currentUser){
-    tg.showAlert('Ошибка: нет данных подарка. selUserGift='+JSON.stringify(selUserGift));
-    return;
+    tg.showAlert('Нет данных');return;
   }
+  const giftToUpgrade = selUserGift;
   closeConfUpg();
   closeOwned();
   document.getElementById('gen-overlay').classList.add('show');
   try{
-    const d=await post('/upgrade_gift',{user_id:currentUser.id,user_gift_id:selUserGift.id});
+    const d=await post('/upgrade_gift',{user_id:currentUser.id,user_gift_id:giftToUpgrade.id});
     await new Promise(r=>setTimeout(r,4000));
     document.getElementById('gen-overlay').classList.remove('show');
     if(d.error){tg.showAlert(d.error);return;}
