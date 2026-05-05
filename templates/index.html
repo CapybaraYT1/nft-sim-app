@@ -10,21 +10,22 @@
 body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-serif;background:#0a0a0f;color:#fff;min-height:100vh;overflow-x:hidden}
 ::-webkit-scrollbar{display:none}
 
-#loader{position:fixed;inset:0;background:#0a0a0f;z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity 0.5s ease}
+#loader{position:fixed;inset:0;background:#0a0a0f;z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity 0.5s ease}
 #loader.hidden{opacity:0;pointer-events:none}
-.loader-icon{font-size:60px;animation:pulse 1.2s ease-in-out infinite}
+.loader-logo{width:80px;height:80px;border-radius:20px;overflow:hidden;margin-bottom:4px}
+.loader-logo img{width:100%;height:100%;object-fit:cover}
 .loader-title{font-size:24px;font-weight:800;letter-spacing:-0.5px;background:linear-gradient(135deg,#f59e0b,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .loader-bar{width:140px;height:3px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden}
 .loader-fill{height:100%;background:linear-gradient(90deg,#f59e0b,#f97316);border-radius:2px;animation:load 1.4s ease forwards}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
 @keyframes load{0%{width:0}100%{width:100%}}
 
 #ban-screen{display:none;position:fixed;inset:0;background:#0a0a0f;z-index:998;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px}
 #ban-screen.show{display:flex}
 
-.header{padding:14px 20px 10px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,15,0.97);backdrop-filter:blur(20px);position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(245,158,11,0.15)}
+.header{padding:12px 16px 10px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,15,0.97);backdrop-filter:blur(20px);position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(245,158,11,0.15)}
 .logo-wrap{display:flex;align-items:center;gap:10px}
-.logo-icon{width:34px;height:34px;background:linear-gradient(135deg,#f59e0b,#f97316);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px}
+.logo-img{width:32px;height:32px;border-radius:8px;overflow:hidden}
+.logo-img img{width:100%;height:100%;object-fit:cover}
 .logo-text{font-size:17px;font-weight:800;letter-spacing:-0.3px}
 .stars-pill{background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.3);padding:7px 14px;border-radius:20px;font-size:14px;font-weight:700;color:#f59e0b;display:flex;align-items:center;gap:5px}
 
@@ -41,42 +42,48 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
 .hero-sub{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.5}
 
 .gifts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 16px}
-.gift-card{background:rgba(255,255,255,0.04);border:1px solid rgba(245,158,11,0.12);border-radius:16px;padding:14px 8px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:transform 0.18s ease;text-align:center}
+.gift-card{background:rgba(255,255,255,0.04);border:1px solid rgba(245,158,11,0.12);border-radius:16px;padding:12px 8px 10px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;transition:transform 0.15s ease;text-align:center}
 .gift-card:active{transform:scale(0.93)}
 .gift-card.sold-out{opacity:0.28;pointer-events:none}
+.g-img{width:64px;height:64px;object-fit:contain}
 .g-emoji{font-size:42px;line-height:1}
 .g-name{font-size:11px;font-weight:600;color:rgba(255,255,255,0.85);line-height:1.3}
 .g-price{font-size:12px;font-weight:700;color:#f59e0b}
 
 .tasks-list{padding:0 16px;display:flex;flex-direction:column;gap:8px}
+.task-section-label{font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.3);padding:12px 0 6px}
 .task-row{background:rgba(255,255,255,0.04);border:1px solid rgba(245,158,11,0.1);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px}
 .task-row.done{opacity:0.4}
 .t-icon{width:42px;height:42px;border-radius:11px;background:rgba(245,158,11,0.12);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
 .t-body{flex:1}
 .t-name{font-size:14px;font-weight:600;margin-bottom:2px}
 .t-reward{font-size:12px;color:#f59e0b;font-weight:600}
+.t-timer{font-size:11px;color:rgba(255,255,255,0.35);margin-top:3px}
 .t-btn{flex-shrink:0;background:linear-gradient(135deg,#f59e0b,#f97316);color:#000;border:none;border-radius:10px;padding:8px 13px;font-size:12px;font-weight:700;cursor:pointer;transition:transform 0.15s}
 .t-btn:active{transform:scale(0.92)}
 .t-btn:disabled{opacity:0.4;cursor:not-allowed}
 .t-done{font-size:18px;flex-shrink:0}
 
-.market-empty{text-align:center;padding:50px 20px;color:rgba(255,255,255,0.2);font-size:14px;line-height:1.9}
+.market-coming{text-align:center;padding:60px 20px}
+.market-coming-icon{font-size:60px;display:block;margin-bottom:16px}
+.market-coming-title{font-size:22px;font-weight:800;margin-bottom:8px;background:linear-gradient(135deg,#f59e0b,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.market-coming-sub{font-size:14px;color:rgba(255,255,255,0.35);line-height:1.6}
 
 .profile-top{margin:14px 16px;border-radius:20px;overflow:hidden;background:rgba(255,255,255,0.04);border:1px solid rgba(245,158,11,0.12)}
-.profile-bg{height:70px;background:linear-gradient(135deg,#f59e0b,#f97316,#ea580c)}
+.profile-bg{height:80px;background:linear-gradient(135deg,#f59e0b,#f97316,#ea580c)}
 .profile-body{padding:0 20px 20px;display:flex;flex-direction:column;align-items:center;text-align:center}
-.p-avatar{width:72px;height:72px;border-radius:50%;border:3px solid #0a0a0f;overflow:hidden;margin-top:-36px;margin-bottom:10px;background:linear-gradient(135deg,#f59e0b,#f97316);display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0}
+.p-avatar{width:86px;height:86px;border-radius:50%;border:3px solid #0a0a0f;overflow:hidden;margin-top:-43px;margin-bottom:10px;background:linear-gradient(135deg,#f59e0b,#f97316);display:flex;align-items:center;justify-content:center;font-size:32px;flex-shrink:0}
 .p-avatar img{width:100%;height:100%;object-fit:cover;display:none}
 .p-name{font-size:20px;font-weight:800;letter-spacing:-0.3px;margin-bottom:3px}
 .p-username{font-size:13px;color:rgba(255,255,255,0.35)}
 .sec-title{font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:rgba(255,255,255,0.28);text-align:center;padding:18px 16px 10px}
 
 .owned-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 16px 16px}
-.owned-card{border-radius:16px;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;cursor:pointer;transition:transform 0.18s;padding:8px;gap:4px}
+.owned-card{border-radius:16px;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;cursor:pointer;transition:transform 0.18s;padding:8px}
 .owned-card.normal{background:rgba(255,255,255,0.05);border:1px solid rgba(245,158,11,0.12)}
 .owned-card.upgraded{border:none}
 .owned-card:active{transform:scale(0.92)}
-.owned-emoji{font-size:38px}
+.owned-gift-img{width:75%;height:75%;object-fit:contain;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
 .owned-model-img{width:80%;height:80%;object-fit:contain;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
 .nft-tag{position:absolute;top:6px;right:6px;background:rgba(0,0,0,0.55);border-radius:6px;padding:2px 6px;font-size:8px;font-weight:800;color:#f59e0b;backdrop-filter:blur(4px)}
 .empty-p{text-align:center;padding:40px 20px;color:rgba(255,255,255,0.2);font-size:14px;line-height:1.7}
@@ -96,9 +103,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
 .sheet{background:#111118;border-radius:24px 24px 0 0;padding:20px 20px 44px;width:100%;position:relative;max-height:88vh;overflow-y:auto}
 .close-x{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.09);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;color:rgba(255,255,255,0.6);transition:background 0.15s;z-index:10}
 .close-x:active{background:rgba(255,255,255,0.2)}
+.sheet-img{width:90px;height:90px;object-fit:contain;display:block;margin:8px auto 12px}
 .sheet-emoji{font-size:68px;text-align:center;display:block;margin:8px 0 12px}
 .sheet-title{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px;letter-spacing:-0.3px}
-.sheet-sub{font-size:13px;color:rgba(255,255,255,0.35);text-align:center;margin-bottom:16px}
 .info-row{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:rgba(255,255,255,0.04);border-radius:11px;margin-bottom:6px}
 .info-label{font-size:13px;color:rgba(255,255,255,0.38)}
 .info-val{font-size:13px;font-weight:600}
@@ -153,14 +160,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
 
 .admin-section{margin:0 16px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(245,158,11,0.1);border-radius:16px;overflow:hidden}
 .admin-section-title{padding:14px 16px;font-size:12px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:rgba(255,255,255,0.35);border-bottom:1px solid rgba(255,255,255,0.05)}
-.admin-user-row{padding:14px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:background 0.15s}
-.admin-user-row:last-child{border-bottom:none}
-.admin-user-row:active{background:rgba(255,255,255,0.04)}
-.admin-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#f97316);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.admin-user-info{flex:1}
-.admin-user-name{font-size:14px;font-weight:600}
-.admin-user-meta{font-size:11px;color:rgba(255,255,255,0.35);margin-top:2px}
-.admin-banned-badge{background:rgba(239,68,68,0.15);color:#ef4444;border:1px solid rgba(239,68,68,0.3);border-radius:8px;padding:3px 8px;font-size:10px;font-weight:700}
+.admin-search-row{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;gap:8px}
+.admin-input{flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:10px 12px;color:#fff;font-size:13px;outline:none}
+.admin-input::placeholder{color:rgba(255,255,255,0.25)}
+.admin-search-btn{background:linear-gradient(135deg,#f59e0b,#f97316);color:#000;border:none;border-radius:10px;padding:10px 14px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
+.admin-user-card{padding:14px 16px}
+.admin-user-name{font-size:16px;font-weight:700;margin-bottom:4px}
+.admin-user-meta{font-size:12px;color:rgba(255,255,255,0.4);line-height:1.6}
+.admin-user-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.admin-action-btn{padding:8px 14px;border-radius:10px;border:none;font-size:12px;font-weight:700;cursor:pointer}
+.btn-ban-action{background:rgba(239,68,68,0.15);color:#ef4444;border:1px solid rgba(239,68,68,0.3)}
+.btn-unban-action{background:rgba(34,197,94,0.15);color:#22c55e;border:1px solid rgba(34,197,94,0.3)}
+.admin-banned-badge{display:inline-block;background:rgba(239,68,68,0.15);color:#ef4444;border:1px solid rgba(239,68,68,0.3);border-radius:8px;padding:2px 8px;font-size:10px;font-weight:700;margin-left:8px}
 .admin-gift-row{padding:14px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(255,255,255,0.04)}
 .admin-gift-row:last-child{border-bottom:none}
 .admin-gift-emoji{font-size:32px;flex-shrink:0}
@@ -168,8 +179,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
 .admin-gift-name{font-size:14px;font-weight:600}
 .admin-gift-meta{font-size:11px;color:rgba(255,255,255,0.35);margin-top:2px}
 .btn-admin-del{background:rgba(239,68,68,0.12);color:#ef4444;border:1px solid rgba(239,68,68,0.25);border-radius:8px;padding:6px 12px;font-size:11px;font-weight:700;cursor:pointer}
-.admin-input{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(245,158,11,0.2);border-radius:12px;padding:12px 14px;color:#fff;font-size:14px;margin-bottom:8px;outline:none}
-.admin-input::placeholder{color:rgba(255,255,255,0.25)}
+.admin-stars-row{padding:12px 16px;display:flex;gap:8px;align-items:center;border-bottom:1px solid rgba(255,255,255,0.05)}
+.admin-stars-input{flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:10px 12px;color:#fff;font-size:13px;outline:none}
+.admin-stars-input::placeholder{color:rgba(255,255,255,0.25)}
+
+.admin-r-input{background:rgba(255,255,255,0.06);border:1px solid rgba(245,158,11,0.2);border-radius:12px;padding:12px 14px;color:#fff;font-size:14px;margin-bottom:8px;outline:none;width:100%}
+.admin-r-input::placeholder{color:rgba(255,255,255,0.25)}
 .admin-radio-row{display:flex;gap:8px;margin-bottom:12px}
 .admin-radio{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.5);font-size:13px;font-weight:600;cursor:pointer;text-align:center;transition:all 0.15s}
 .admin-radio.selected{border-color:#f59e0b;background:rgba(245,158,11,0.12);color:#f59e0b}
@@ -180,7 +195,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
 <body>
 
 <div id="loader">
-  <div class="loader-icon">🎁</div>
+  <div class="loader-logo"><img src="https://i.ibb.co/qYFSKBPb/IMG-20260505-121717-095.jpg" alt="NFT SIM"/></div>
   <div class="loader-title">NFT SIM</div>
   <div class="loader-bar"><div class="loader-fill"></div></div>
 </div>
@@ -193,7 +208,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
 
 <div class="header">
   <div class="logo-wrap">
-    <div class="logo-icon">🎁</div>
+    <div class="logo-img"><img src="https://i.ibb.co/qYFSKBPb/IMG-20260505-121717-095.jpg" alt=""/></div>
     <div class="logo-text">NFT SIM</div>
   </div>
   <div class="stars-pill">⭐ <span id="stars-count">—</span></div>
@@ -223,9 +238,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
     <div class="hero-title">Маркет</div>
     <div class="hero-sub">Покупайте подарки выставленные другими пользователями.</div>
   </div>
-  <div class="market-empty">
-    <div style="font-size:52px;margin-bottom:14px;opacity:0.4">🏪</div>
-    Здесь появятся подарки<br>выставленные на продажу
+  <div class="market-coming">
+    <span class="market-coming-icon">🔥</span>
+    <div class="market-coming-title">Скоро откроем!</div>
+    <div class="market-coming-sub">Маркет находится в разработке.<br>Следите за обновлениями!</div>
   </div>
 </div>
 
@@ -250,8 +266,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
     <span class="hero-icon">🛡️</span>
     <div class="hero-title">Панель администратора</div>
   </div>
-  <div class="sec-title">Пользователи</div>
-  <div class="admin-section" id="admin-users-list"><div class="state-msg">Загрузка…</div></div>
+
+  <div class="sec-title">Поиск пользователя</div>
+  <div class="admin-section">
+    <div class="admin-search-row">
+      <input class="admin-input" id="admin-search-input" placeholder="@username"/>
+      <button class="admin-search-btn" onclick="adminSearchUser()">Найти</button>
+    </div>
+    <div id="admin-user-result"></div>
+  </div>
+
+  <div class="sec-title">Начислить звёзды</div>
+  <div class="admin-section">
+    <div class="admin-search-row">
+      <input class="admin-input" id="give-stars-username" placeholder="@username"/>
+      <input class="admin-stars-input" id="give-stars-amount" placeholder="Кол-во" type="number" style="width:90px;flex:none"/>
+      <button class="admin-search-btn" onclick="adminGiveStars()">✚</button>
+    </div>
+    <div id="give-stars-result" style="padding:0 16px 12px;font-size:13px;color:#22c55e"></div>
+  </div>
+
   <div class="sec-title">Подарки</div>
   <div class="admin-section" id="admin-gifts-list"><div class="state-msg">Загрузка…</div></div>
 </div>
@@ -281,7 +315,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
 <div class="overlay" id="modal-buy">
   <div class="sheet">
     <button class="close-x" onclick="closeBuy()">✕</button>
-    <span class="sheet-emoji" id="b-emoji"></span>
+    <img class="sheet-img" id="b-img" src="" alt="" onerror="this.style.display='none'"/>
+    <span class="sheet-emoji" id="b-emoji" style="display:none"></span>
     <div class="sheet-title" id="b-name"></div>
     <div class="price-big" id="b-price"></div>
     <div class="info-row"><span class="info-label">Осталось</span><span class="info-val" id="b-supply"></span></div>
@@ -295,15 +330,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
     <button class="close-x" onclick="closeOwned()">✕</button>
     <div id="owned-nft-preview" style="display:none;margin:-20px -20px 16px;border-radius:16px 16px 0 0;overflow:hidden">
       <div class="nft-owned-bg" id="owned-bg-preview">
-        <div class="nft-owned-model">
-          <img id="owned-model-img" src="" alt=""/>
-        </div>
+        <div class="nft-owned-model"><img id="owned-model-img" src="" alt=""/></div>
       </div>
     </div>
-    <span class="sheet-emoji" id="o-emoji"></span>
+    <img class="sheet-img" id="o-gift-img" src="" alt="" style="display:none"/>
+    <span class="sheet-emoji" id="o-emoji" style="display:none"></span>
     <div class="sheet-title" id="o-name"></div>
     <div class="info-row" id="o-nft-row" style="display:none"><span class="info-label">NFT #</span><span class="info-val" id="o-nft"></span></div>
-    <div class="info-row"><span class="info-label">Цена</span><span class="info-val" id="o-price"></span></div>
     <div class="info-row" id="o-model-row" style="display:none"><span class="info-label">Модель</span><span class="info-val" id="o-model"></span></div>
     <div class="info-row" id="o-bg-row" style="display:none"><span class="info-label">Фон</span><span class="info-val" id="o-bg"></span></div>
     <button class="btn-m btn-gold" id="btn-upg-o" onclick="askUpgrade()">✨ Улучшить за 25 ⭐</button>
@@ -350,37 +383,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
 <div id="nft-result">
   <div class="nft-card">
     <div class="nft-card-bg" id="nft-bg">
-      <div class="nft-card-model">
-        <img id="nft-model-img" src="" alt=""/>
-      </div>
+      <div class="nft-card-model"><img id="nft-model-img" src="" alt=""/></div>
       <div class="nft-serial" id="nft-serial"></div>
     </div>
     <button class="nft-close" onclick="closeNftResult()">✕</button>
     <div class="nft-info">
       <div class="nft-name" id="nft-gift-name"></div>
       <div class="nft-table">
-        <div class="nft-row">
-          <span class="nft-row-label">Владелец</span>
-          <span class="nft-row-val" id="nft-owner"></span>
-        </div>
-        <div class="nft-row">
-          <span class="nft-row-label">Модель</span>
-          <span class="nft-row-val">
-            <span id="nft-model-name"></span>
-            <span class="chance-badge" id="nft-model-chance"></span>
-          </span>
-        </div>
-        <div class="nft-row">
-          <span class="nft-row-label">Фон</span>
-          <span class="nft-row-val">
-            <span id="nft-bg-name"></span>
-            <span class="chance-badge" id="nft-bg-chance"></span>
-          </span>
-        </div>
-        <div class="nft-row">
-          <span class="nft-row-label">Количество</span>
-          <span class="nft-row-val" id="nft-supply"></span>
-        </div>
+        <div class="nft-row"><span class="nft-row-label">Владелец</span><span class="nft-row-val" id="nft-owner"></span></div>
+        <div class="nft-row"><span class="nft-row-label">Модель</span><span class="nft-row-val"><span id="nft-model-name"></span><span class="chance-badge" id="nft-model-chance"></span></span></div>
+        <div class="nft-row"><span class="nft-row-label">Фон</span><span class="nft-row-val"><span id="nft-bg-name"></span><span class="chance-badge" id="nft-bg-chance"></span></span></div>
+        <div class="nft-row"><span class="nft-row-label">Количество</span><span class="nft-row-val" id="nft-supply"></span></div>
       </div>
     </div>
   </div>
@@ -392,24 +405,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
     <div class="conf-icon">🚫</div>
     <div class="conf-title">Заблокировать</div>
     <div class="conf-sub" id="ban-user-name"></div>
-    <input class="admin-input" id="ban-reason" placeholder="Причина (необязательно)"/>
+    <input class="admin-r-input" id="ban-reason" placeholder="Причина (необязательно)"/>
     <div class="admin-radio-row">
       <div class="admin-radio selected" id="radio-temp" onclick="selectBanType('temp')">На время</div>
       <div class="admin-radio" id="radio-perm" onclick="selectBanType('perm')">Навсегда</div>
     </div>
-    <input class="admin-input" id="ban-hours" placeholder="Часов (например 24)" type="number"/>
+    <input class="admin-r-input" id="ban-hours" placeholder="Часов (например 24)" type="number"/>
     <button class="btn-m btn-red" onclick="doBan()">Заблокировать</button>
     <button class="btn-m btn-ghost" onclick="closeConfBan()">Отмена</button>
-  </div>
-</div>
-
-<!-- ADMIN USER GIFTS -->
-<div class="overlay" id="modal-admin-gifts">
-  <div class="sheet">
-    <button class="close-x" onclick="closeAdminGifts()">✕</button>
-    <div class="sheet-title" id="admin-gifts-title">Подарки</div>
-    <div class="sheet-sub" id="admin-gifts-sub"></div>
-    <div id="admin-gifts-list-modal" style="margin-top:12px"></div>
   </div>
 </div>
 
@@ -417,10 +420,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
 const tg=window.Telegram.WebApp;
 tg.ready();tg.expand();
 const ADMIN_ID=7231807922;
+const LOGO='https://i.ibb.co/qYFSKBPb/IMG-20260505-121717-095.jpg';
+const EGG_IMG='https://telegifter.ru/wp-content/themes/gifts/assets/img/gifts/noupdate/Easter%20Egg.webp';
+
 let currentUser=null,selGift=null,selUserGift=null;
 let banType='temp',adminTargetUser=null;
 const tgUser=tg.initDataUnsafe?.user;
 const loaded={};
+const timers={};
 
 window.addEventListener('load',()=>{
   setTimeout(()=>{
@@ -446,6 +453,12 @@ async function post(url,body){const r=await fetch(url,{method:'POST',headers:{'C
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 function enc(g){return encodeURIComponent(JSON.stringify(g))}
 function setStars(n){if(currentUser)currentUser.stars=n;document.getElementById('stars-count').textContent=n;}
+
+function formatTimer(sec){
+  const h=Math.floor(sec/3600),m=Math.floor((sec%3600)/60),s=sec%60;
+  if(h>0)return h+'ч '+(m<10?'0':'')+m+'м';
+  return m+'м '+(s<10?'0':'')+s+'с';
+}
 
 async function init(){
   if(tgUser){
@@ -496,8 +509,9 @@ async function loadGifts(){
     c.className='gifts-grid';
     c.innerHTML=gifts.map(g=>{
       const rem=g.total_supply-g.sold,out=rem<=0;
+      const imgUrl=g.img||EGG_IMG;
       return `<div class="gift-card${out?' sold-out':''}" onclick="openBuy('${enc(g)}')">
-        <div class="g-emoji">${g.emoji||'🎁'}</div>
+        <img class="g-img" src="${imgUrl}" alt="" onerror="this.style.display='none'"/>
         <div class="g-name">${esc(g.name)}</div>
         <div class="g-price">⭐ ${g.price}</div>
       </div>`;
@@ -508,7 +522,10 @@ async function loadGifts(){
 function openBuy(encoded){
   selGift=JSON.parse(decodeURIComponent(encoded));
   const rem=selGift.total_supply-selGift.sold;
-  document.getElementById('b-emoji').textContent=selGift.emoji||'🎁';
+  const imgUrl=selGift.img||EGG_IMG;
+  const imgEl=document.getElementById('b-img');
+  imgEl.src=imgUrl;imgEl.style.display='block';
+  document.getElementById('b-emoji').style.display='none';
   document.getElementById('b-name').textContent=selGift.name;
   document.getElementById('b-price').textContent='⭐ '+selGift.price;
   document.getElementById('b-supply').textContent=rem+' шт.';
@@ -536,13 +553,67 @@ async function loadTasks(){
     const tasks=await api('/tasks/'+currentUser.id);
     if(!tasks.length){c.textContent='Задания скоро появятся';return;}
     c.className='tasks-list';
-    c.innerHTML=tasks.map(t=>`
-      <div class="task-row${t.done?' done':''}" id="task-${t.id}">
-        <div class="t-icon">${t.emoji||'⭐'}</div>
-        <div class="t-body"><div class="t-name">${esc(t.title)}</div><div class="t-reward">+${t.reward} ⭐</div></div>
-        ${t.done?'<div class="t-done">✅</div>':`<button class="t-btn" onclick="doTask(${t.id},${t.reward},this)">Выполнить</button>`}
-      </div>`).join('');
+    const oneTime=tasks.filter(t=>!t.is_daily);
+    const daily=tasks.filter(t=>t.is_daily);
+    let html='';
+    if(oneTime.length){
+      html+='<div class="task-section-label">Разовые</div>';
+      html+=oneTime.map(t=>renderTask(t)).join('');
+    }
+    if(daily.length){
+      html+='<div class="task-section-label">Ежедневные</div>';
+      html+=daily.map(t=>renderTask(t)).join('');
+    }
+    c.innerHTML=html;
+    daily.forEach(t=>{
+      if(t.done&&t.cooldown_seconds>0)startTimer(t.id,t.cooldown_seconds);
+    });
   }catch(e){c.textContent='Ошибка';}
+}
+
+function renderTask(t){
+  const timerHtml=t.is_daily&&t.done&&t.cooldown_seconds>0
+    ?`<div class="t-timer" id="timer-${t.id}">${formatTimer(t.cooldown_seconds)}</div>`:
+    '';
+  return `<div class="task-row${t.done?' done':''}" id="task-${t.id}">
+    <div class="t-icon">${t.emoji||'⭐'}</div>
+    <div class="t-body">
+      <div class="t-name">${esc(t.title)}</div>
+      <div class="t-reward">+${t.reward} ⭐</div>
+      ${timerHtml}
+    </div>
+    ${t.done?'<div class="t-done">✅</div>':`<button class="t-btn" onclick="doTask(${t.id},${t.reward},this)">Выполнить</button>`}
+  </div>`;
+}
+
+function startTimer(taskId,seconds){
+  if(timers[taskId])clearInterval(timers[taskId]);
+  let remaining=seconds;
+  timers[taskId]=setInterval(()=>{
+    remaining--;
+    const el=document.getElementById('timer-'+taskId);
+    if(el)el.textContent=formatTimer(remaining);
+    if(remaining<=0){
+      clearInterval(timers[taskId]);
+      const row=document.getElementById('task-'+taskId);
+      if(row){
+        row.classList.remove('done');
+        const timerEl=document.getElementById('timer-'+taskId);
+        if(timerEl)timerEl.remove();
+        const doneEl=row.querySelector('.t-done');
+        if(doneEl){
+          const btn=document.createElement('button');
+          btn.className='t-btn';
+          const reward=parseInt(row.querySelector('.t-reward').textContent.replace(/\D/g,''));
+          const tid=taskId;
+          btn.onclick=function(){doTask(tid,reward,this);};
+          btn.textContent='Выполнить';
+          doneEl.replaceWith(btn);
+        }
+        row.classList.remove('done');
+      }
+    }
+  },1000);
 }
 
 async function doTask(taskId,reward,btn){
@@ -555,7 +626,7 @@ async function doTask(taskId,reward,btn){
       try{
         const d=await post('/complete_task',{user_id:currentUser.id,task_id:taskId});
         if(d.error){tg.showAlert(d.error);btn.disabled=false;btn.textContent='Выполнить';return;}
-        setStars(d.stars);doneTask(row);tg.showAlert('⭐ +'+reward);
+        setStars(d.stars);doneTask(row,false);tg.showAlert('⭐ +'+reward);
       }catch(e){tg.showAlert('Ошибка');btn.disabled=false;btn.textContent='Выполнить';}
     },3000);return;
   }
@@ -563,14 +634,18 @@ async function doTask(taskId,reward,btn){
     window.open('https://t.me/share/url?url=https://t.me/nftsim_bot?start=ref_'+currentUser.id+'&text=Присоединяйся к NFT SIM!');
     btn.disabled=true;btn.textContent='Отправлено';return;
   }
+  if(title==='Улучшить подарок'){
+    tg.showAlert('Улучшите любой подарок в профиле чтобы получить награду!');return;
+  }
   btn.disabled=true;btn.textContent='…';
   try{
     const d=await post('/complete_task',{user_id:currentUser.id,task_id:taskId});
     if(d.error){tg.showAlert(d.error);btn.disabled=false;btn.textContent='Выполнить';return;}
-    setStars(d.stars);doneTask(row);tg.showAlert('⭐ +'+reward);
+    setStars(d.stars);doneTask(row,false);tg.showAlert('⭐ +'+reward);
   }catch(e){tg.showAlert('Ошибка');btn.disabled=false;btn.textContent='Выполнить';}
 }
-function doneTask(row){
+
+function doneTask(row,isDaily,cooldown){
   row.classList.add('done');
   const btn=row.querySelector('.t-btn');
   if(btn){const d=document.createElement('div');d.className='t-done';d.textContent='✅';btn.replaceWith(d);}
@@ -593,8 +668,9 @@ async function loadProfile(){
           <img class="owned-model-img" src="${g.model_url}" alt="" onerror="this.style.display='none'"/>
         </div>`;
       }
+      const giftImg=g.gifts?.img||EGG_IMG;
       return `<div class="owned-card normal" onclick="openOwned('${enc(g)}')">
-        <div class="owned-emoji">${g.gifts?.emoji||'🎁'}</div>
+        <img class="owned-gift-img" src="${giftImg}" alt="" onerror="this.style.display='none'"/>
       </div>`;
     }).join('');
   }catch(e){c.innerHTML='<div class="empty-p">Ошибка загрузки</div>';}
@@ -606,24 +682,26 @@ function openOwned(encoded){
   const isNft=g.is_upgraded&&g.bg_color&&g.model_url;
   const preview=document.getElementById('owned-nft-preview');
   const emojiEl=document.getElementById('o-emoji');
+  const giftImgEl=document.getElementById('o-gift-img');
   if(isNft){
     preview.style.display='block';
     document.getElementById('owned-bg-preview').style.background='#'+g.bg_color;
     document.getElementById('owned-model-img').src=g.model_url;
     emojiEl.style.display='none';
+    giftImgEl.style.display='none';
     document.getElementById('o-model-row').style.display='flex';
     document.getElementById('o-bg-row').style.display='flex';
     document.getElementById('o-model').textContent=g.model_name+' ('+g.model_chance+'%)';
     document.getElementById('o-bg').textContent=g.bg_name+' ('+g.bg_chance+'%)';
   }else{
     preview.style.display='none';
-    emojiEl.style.display='block';
-    emojiEl.textContent=g.gifts?.emoji||'🎁';
+    emojiEl.style.display='none';
+    giftImgEl.src=g.gifts?.img||EGG_IMG;
+    giftImgEl.style.display='block';
     document.getElementById('o-model-row').style.display='none';
     document.getElementById('o-bg-row').style.display='none';
   }
   document.getElementById('o-name').textContent=g.gifts?.name||'Подарок';
-  document.getElementById('o-price').textContent='⭐ '+(g.gifts?.price||0);
   const nftRow=document.getElementById('o-nft-row');
   if(g.is_upgraded&&g.nft_number){nftRow.style.display='flex';document.getElementById('o-nft').textContent='#'+g.nft_number;}
   else{nftRow.style.display='none';}
@@ -632,24 +710,23 @@ function openOwned(encoded){
   document.getElementById('modal-owned').classList.add('open');
 }
 function closeOwned(){document.getElementById('modal-owned').classList.remove('open');selUserGift=null;}
-
 function askUpgrade(){document.getElementById('conf-upg').classList.add('open');}
 function closeConfUpg(){document.getElementById('conf-upg').classList.remove('open');}
 
 async function doUpgrade(){
   if(!selUserGift||!currentUser){tg.showAlert('Нет данных');return;}
   const giftToUpgrade=selUserGift;
-  closeConfUpg();
-  closeOwned();
+  closeConfUpg();closeOwned();
   document.getElementById('gen-overlay').classList.add('show');
   try{
     const d=await post('/upgrade_gift',{user_id:currentUser.id,user_gift_id:giftToUpgrade.id});
-    await new Promise(r=>setTimeout(r,2000));
+    await new Promise(r=>setTimeout(r,5000));
     document.getElementById('gen-overlay').classList.remove('show');
     if(d.error){tg.showAlert(d.error);return;}
     setStars(d.stars);
     showNftResult(d);
     loaded.profile=false;
+    loaded.tasks=false;
   }catch(e){
     document.getElementById('gen-overlay').classList.remove('show');
     tg.showAlert('Ошибка: '+e.message);
@@ -674,6 +751,7 @@ function showNftResult(d){
 function closeNftResult(){
   document.getElementById('nft-result').classList.remove('show');
   if(document.getElementById('page-profile').classList.contains('active'))loadProfile();
+  if(document.getElementById('page-tasks').classList.contains('active')){loaded.tasks=false;loadTasks();}
 }
 
 function askSell(){
@@ -701,26 +779,67 @@ async function doSell(){
 
 async function loadAdmin(){
   if(!currentUser||currentUser.id!==ADMIN_ID)return;
-  loadAdminUsers();
   loadAdminGifts();
 }
 
-async function loadAdminUsers(){
-  const c=document.getElementById('admin-users-list');
-  c.innerHTML='<div class="state-msg">Загрузка…</div>';
+async function adminSearchUser(){
+  const username=document.getElementById('admin-search-input').value.trim();
+  if(!username){tg.showAlert('Введите username');return;}
+  const res=document.getElementById('admin-user-result');
+  res.innerHTML='<div style="padding:12px 16px;color:rgba(255,255,255,0.4);font-size:13px">Поиск…</div>';
   try{
-    const users=await api('/admin/users?admin_id='+ADMIN_ID);
-    if(!users.length){c.innerHTML='<div class="state-msg">Нет пользователей</div>';return;}
-    c.innerHTML='<div class="admin-section-title">Топ пользователей</div>'+users.map(u=>`
-      <div class="admin-user-row" onclick="openAdminUser('${enc(u)}')">
-        <div class="admin-avatar">👤</div>
-        <div class="admin-user-info">
-          <div class="admin-user-name">${esc(u.username||'—')}</div>
-          <div class="admin-user-meta">ID: ${u.id} · ⭐ ${u.stars}</div>
-        </div>
-        ${u.is_banned?'<div class="admin-banned-badge">БАН</div>':''}
-      </div>`).join('');
-  }catch(e){c.innerHTML='<div class="state-msg">Ошибка</div>';}
+    const u=await api('/admin/find_user?admin_id='+ADMIN_ID+'&username='+encodeURIComponent(username));
+    if(u.error){res.innerHTML=`<div style="padding:12px 16px;color:#ef4444;font-size:13px">${u.error}</div>`;return;}
+    adminTargetUser=u;
+    const banBadge=u.is_banned?'<span class="admin-banned-badge">БАН</span>':'';
+    res.innerHTML=`<div class="admin-user-card">
+      <div class="admin-user-name">@${esc(u.username||'—')}${banBadge}</div>
+      <div class="admin-user-meta">
+        ID: ${u.id}<br>
+        ⭐ Звёзды: ${u.stars}<br>
+        🎁 Подарков: ${u.gifts_count||0} (NFT: ${u.nft_count||0})
+      </div>
+      <div class="admin-user-actions">
+        ${u.is_banned
+          ?`<button class="admin-action-btn btn-unban-action" onclick="adminUnbanUser(${u.id})">✅ Разбанить</button>`
+          :`<button class="admin-action-btn btn-ban-action" onclick="adminOpenBan(${u.id},'${esc(u.username||'')}')">🚫 Заблокировать</button>`
+        }
+      </div>
+    </div>`;
+  }catch(e){res.innerHTML='<div style="padding:12px 16px;color:#ef4444;font-size:13px">Ошибка</div>';}
+}
+
+function adminOpenBan(userId,username){
+  adminTargetUser={id:userId,username};
+  document.getElementById('ban-user-name').textContent=username+' (ID: '+userId+')';
+  document.getElementById('ban-reason').value='';
+  document.getElementById('ban-hours').value='';
+  selectBanType('temp');
+  document.getElementById('conf-ban').classList.add('open');
+}
+
+async function adminUnbanUser(userId){
+  tg.showConfirm('Разбанить пользователя?',async(ok)=>{
+    if(!ok)return;
+    await post('/admin/unban',{admin_id:ADMIN_ID,user_id:userId});
+    tg.showAlert('✅ Разбанен');
+    adminSearchUser();
+  });
+}
+
+async function adminGiveStars(){
+  const username=document.getElementById('give-stars-username').value.trim();
+  const amount=parseInt(document.getElementById('give-stars-amount').value)||0;
+  const res=document.getElementById('give-stars-result');
+  if(!username||amount<=0){res.textContent='Укажите username и количество';res.style.color='#ef4444';return;}
+  try{
+    const d=await post('/admin/give_stars',{admin_id:ADMIN_ID,username,amount});
+    if(d.error){res.textContent=d.error;res.style.color='#ef4444';return;}
+    res.textContent='✅ @'+d.username+' получил ⭐ '+amount+' (итого: '+d.stars+')';
+    res.style.color='#22c55e';
+    document.getElementById('give-stars-username').value='';
+    document.getElementById('give-stars-amount').value='';
+  }catch(e){res.textContent='Ошибка';res.style.color='#ef4444';}
 }
 
 async function loadAdminGifts(){
@@ -740,25 +859,6 @@ async function loadAdminGifts(){
   }catch(e){c.innerHTML='<div class="state-msg">Ошибка</div>';}
 }
 
-function openAdminUser(encoded){
-  adminTargetUser=JSON.parse(decodeURIComponent(encoded));
-  const u=adminTargetUser;
-  if(u.is_banned){
-    tg.showConfirm('Разбанить '+u.username+'?',async(ok)=>{
-      if(!ok)return;
-      await post('/admin/unban',{admin_id:ADMIN_ID,user_id:u.id});
-      tg.showAlert('✅ Разбанен');
-      loaded.admin=false;loadAdmin();
-    });
-  }else{
-    document.getElementById('ban-user-name').textContent=(u.username||'—')+' (ID: '+u.id+')';
-    document.getElementById('ban-reason').value='';
-    document.getElementById('ban-hours').value='';
-    selectBanType('temp');
-    document.getElementById('conf-ban').classList.add('open');
-  }
-}
-
 function selectBanType(type){
   banType=type;
   document.getElementById('radio-temp').classList.toggle('selected',type==='temp');
@@ -776,7 +876,7 @@ async function doBan(){
   await post('/admin/ban',{admin_id:ADMIN_ID,user_id:adminTargetUser.id,reason,permanent,hours});
   closeConfBan();
   tg.showAlert('🚫 Заблокирован');
-  loaded.admin=false;loadAdmin();
+  adminSearchUser();
 }
 
 async function adminDeleteGiftType(giftId,giftName){
@@ -787,38 +887,6 @@ async function adminDeleteGiftType(giftId,giftName){
     tg.showAlert('✅ Удалено, звёзды возвращены');
     loaded.admin=false;loaded.gifts=false;
     loadAdmin();loadGifts();
-  });
-}
-
-async function openAdminGifts(userId,username){
-  const modal=document.getElementById('modal-admin-gifts');
-  document.getElementById('admin-gifts-title').textContent='Подарки';
-  document.getElementById('admin-gifts-sub').textContent=username;
-  document.getElementById('admin-gifts-list-modal').innerHTML='<div class="state-msg">Загрузка…</div>';
-  modal.classList.add('open');
-  try{
-    const gifts=await api('/admin/user_gifts/'+userId+'?admin_id='+ADMIN_ID);
-    if(!gifts.length){document.getElementById('admin-gifts-list-modal').innerHTML='<div class="state-msg">Нет подарков</div>';return;}
-    document.getElementById('admin-gifts-list-modal').innerHTML=gifts.map(g=>`
-      <div class="admin-gift-row">
-        <div class="admin-gift-emoji">${g.gifts?.emoji||'🎁'}</div>
-        <div class="admin-gift-info">
-          <div class="admin-gift-name">${esc(g.gifts?.name||'')}</div>
-          <div class="admin-gift-meta">${g.is_upgraded?'NFT #'+g.nft_number:'Обычный'}</div>
-        </div>
-        <button class="btn-admin-del" onclick="adminDeleteNft(${g.id})">Удалить</button>
-      </div>`).join('');
-  }catch(e){document.getElementById('admin-gifts-list-modal').innerHTML='<div class="state-msg">Ошибка</div>';}
-}
-function closeAdminGifts(){document.getElementById('modal-admin-gifts').classList.remove('open');}
-
-async function adminDeleteNft(ugId){
-  tg.showConfirm('Удалить подарок? Звёзды вернутся пользователю.',async(ok)=>{
-    if(!ok)return;
-    const d=await post('/admin/delete_nft',{admin_id:ADMIN_ID,user_gift_id:ugId});
-    if(d.error){tg.showAlert(d.error);return;}
-    tg.showAlert('✅ Удалено');
-    closeAdminGifts();loaded.admin=false;loadAdmin();
   });
 }
 
