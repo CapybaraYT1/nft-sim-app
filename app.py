@@ -1,7 +1,7 @@
 import os
 import time
 import random
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from flask import Flask, render_template, request, jsonify
 from supabase import create_client
 
@@ -163,6 +163,8 @@ GIFT_MODELS = {
     ]
 }
 
+EASTER_EGG_IMG = "https://telegifter.ru/wp-content/themes/gifts/assets/img/gifts/noupdate/Easter%20Egg.webp"
+
 def weighted_choice(items):
     total = sum(i["chance"] for i in items)
     r = random.uniform(0, total)
@@ -211,19 +213,28 @@ def get_or_create_user():
         if referrer_id and referrer_id != user_id:
             ref = supabase.table("users").select("*").eq("id", referrer_id).execute()
             if ref.data:
-                supabase.table("users").update({"stars": ref.data[0]["stars"] + 500}).eq("id", referrer_id).execute()
+                supabase.table("users").update({"stars": ref.data[0]["stars"] + 1000}).eq("id", referrer_id).execute()
     user = supabase.table("users").select("*").eq("id", user_id).execute()
     return jsonify(user.data[0])
 
 @app.route("/gifts")
 def get_gifts():
-    gifts = supabase.table("gifts").select("*").order("price", desc=False).execute()
-    return jsonify(gifts.data)
+    gifts = supabase.table("gifts").select("*").eq("name", "Easter Egg").execute()
+    result = []
+    for g in gifts.data:
+        g["img"] = EASTER_EGG_IMG
+        result.append(g)
+    return jsonify(result)
 
 @app.route("/user_gifts/<int:user_id>")
 def get_user_gifts(user_id):
     gifts = supabase.table("user_gifts").select("*, gifts(*)").eq("user_id", user_id).execute()
-    return jsonify(gifts.data)
+    result = []
+    for g in gifts.data:
+        if g["gifts"] and g["gifts"]["name"] == "Easter Egg":
+            g["gifts"]["img"] = EASTER_EGG_IMG
+        result.append(g)
+    return jsonify(result)
 
 @app.route("/buy_gift", methods=["POST"])
 def buy_gift():
@@ -233,19 +244,19 @@ def buy_gift():
     ban = check_ban(user_id)
     if ban:
         return jsonify({"error": "Вы заблокированы"}), 403
+    gift = supabase.table("gifts").select("*").eq("id", gift_id).execute().data
+    if not gift:
+        return jsonify({"error": "Подарок не найден"}), 404
+    gift = gift[0]
+    user = supabase.table("users").select("*").eq("id", user_id).execute().data
+    if not user:
+        return jsonify({"error": "Пользователь не найден"}), 404
+    user = user[0]
+    if user["stars"] < gift["price"]:
+        return jsonify({"error": "Недостаточно звёзд"}), 400
+    if gift["sold"] >= gift["total_supply"]:
+        return jsonify({"error": "Тираж закончился"}), 400
     for attempt in range(3):
-        gift = supabase.table("gifts").select("*").eq("id", gift_id).execute().data
-        if not gift:
-            return jsonify({"error": "Подарок не найден"}), 404
-        gift = gift[0]
-        user = supabase.table("users").select("*").eq("id", user_id).execute().data
-        if not user:
-            return jsonify({"error": "Пользователь не найден"}), 404
-        user = user[0]
-        if user["stars"] < gift["price"]:
-            return jsonify({"error": "Недостаточно звёзд"}), 400
-        if gift["sold"] >= gift["total_supply"]:
-            return jsonify({"error": "Тираж закончился"}), 400
         new_sold = gift["sold"] + 1
         result = supabase.table("gifts").update({"sold": new_sold}).eq("id", gift_id).eq("sold", gift["sold"]).execute()
         if result.data:
@@ -256,14 +267,15 @@ def buy_gift():
                 task_id = tasks.data[0]["id"]
                 already = supabase.table("user_tasks").select("*").eq("user_id", user_id).eq("task_id", task_id).execute()
                 if not already.data:
-                    supabase.table("user_tasks").insert({"user_id": user_id, "task_id": task_id}).execute()
+                    supabase.table("user_tasks").insert({"user_id": user_id, "task_id": task_id, "completed_at": datetime.now(timezone.utc).isoformat()}).execute()
                     bonus = tasks.data[0]["reward"]
                     current_stars = user["stars"] - gift["price"]
                     supabase.table("users").update({"stars": current_stars + bonus}).eq("id", user_id).execute()
             user_updated = supabase.table("users").select("*").eq("id", user_id).execute().data[0]
             return jsonify({"success": True, "stars_left": user_updated["stars"]})
         else:
-            time.sleep(0.1)
+            gift = supabase.table("gifts").select("*").eq("id", gift_id).execute().data[0]
+            time.sleep(0.05)
     return jsonify({"error": "Попробуйте снова"}), 409
 
 @app.route("/upgrade_gift", methods=["POST"])
@@ -301,6 +313,19 @@ def upgrade_gift():
                 "bg_color": chosen_bg["color"],
                 "bg_chance": chosen_bg["chance"],
             }).eq("id", user_gift_id).execute()
+            # Ежедневное задание улучшить подарок
+            daily_task = supabase.table("tasks").select("*").eq("title", "Улучшить подарок").execute()
+            if daily_task.data:
+                task_id = daily_task.data[0]["id"]
+                last = supabase.table("user_tasks").select("*").eq("user_id", user_id).eq("task_id", task_id).order("completed_at", desc=True).limit(1).execute()
+                can_claim = True
+                if last.data and last.data[0].get("completed_at"):
+                    last_time = datetime.fromisoformat(last.data[0]["completed_at"].replace("Z", "+00:00"))
+                    can_claim = datetime.now(timezone.utc) - last_time > timedelta(hours=24)
+                if can_claim:
+                    supabase.table("user_tasks").insert({"user_id": user_id, "task_id": task_id, "completed_at": datetime.now(timezone.utc).isoformat()}).execute()
+                    user_after = supabase.table("users").select("*").eq("id", user_id).execute().data[0]
+                    supabase.table("users").update({"stars": user_after["stars"] + daily_task.data[0]["reward"]}).eq("id", user_id).execute()
             user_updated = supabase.table("users").select("*").eq("id", user_id).execute().data[0]
             available = gift["total_supply"] - gift.get("sold_for_stars", 0)
             return jsonify({
@@ -319,7 +344,7 @@ def upgrade_gift():
                 "username": user["username"],
             })
         else:
-            time.sleep(0.1)
+            time.sleep(0.05)
     return jsonify({"error": "Попробуйте снова"}), 409
 
 @app.route("/sell_gift", methods=["POST"])
@@ -348,21 +373,49 @@ def sell_gift():
 @app.route("/tasks/<int:user_id>")
 def get_tasks(user_id):
     tasks = supabase.table("tasks").select("*").execute()
-    done = supabase.table("user_tasks").select("task_id").eq("user_id", user_id).execute()
-    done_ids = [d["task_id"] for d in done.data]
+    now = datetime.now(timezone.utc)
+    result = []
     for t in tasks.data:
-        t["done"] = t["id"] in done_ids
-    return jsonify(tasks.data)
+        if t.get("is_daily"):
+            last = supabase.table("user_tasks").select("*").eq("user_id", user_id).eq("task_id", t["id"]).order("completed_at", desc=True).limit(1).execute()
+            if last.data and last.data[0].get("completed_at"):
+                last_time = datetime.fromisoformat(last.data[0]["completed_at"].replace("Z", "+00:00"))
+                diff = now - last_time
+                if diff < timedelta(hours=24):
+                    remaining = timedelta(hours=24) - diff
+                    total_sec = int(remaining.total_seconds())
+                    t["done"] = True
+                    t["cooldown_seconds"] = total_sec
+                else:
+                    t["done"] = False
+                    t["cooldown_seconds"] = 0
+            else:
+                t["done"] = False
+                t["cooldown_seconds"] = 0
+        else:
+            done = supabase.table("user_tasks").select("task_id").eq("user_id", user_id).eq("task_id", t["id"]).execute()
+            t["done"] = len(done.data) > 0
+            t["cooldown_seconds"] = 0
+        result.append(t)
+    return jsonify(result)
 
 @app.route("/complete_task", methods=["POST"])
 def complete_task():
     data = request.json
     user_id = data.get("user_id")
     task_id = data.get("task_id")
-    already = supabase.table("user_tasks").select("*").eq("user_id", user_id).eq("task_id", task_id).execute()
-    if already.data:
-        return jsonify({"error": "Уже выполнено"}), 400
     task = supabase.table("tasks").select("*").eq("id", task_id).execute().data[0]
+    now = datetime.now(timezone.utc)
+    if task.get("is_daily"):
+        last = supabase.table("user_tasks").select("*").eq("user_id", user_id).eq("task_id", task_id).order("completed_at", desc=True).limit(1).execute()
+        if last.data and last.data[0].get("completed_at"):
+            last_time = datetime.fromisoformat(last.data[0]["completed_at"].replace("Z", "+00:00"))
+            if now - last_time < timedelta(hours=24):
+                return jsonify({"error": "Задание ещё не доступно"}), 400
+    else:
+        already = supabase.table("user_tasks").select("*").eq("user_id", user_id).eq("task_id", task_id).execute()
+        if already.data:
+            return jsonify({"error": "Уже выполнено"}), 400
     if task["title"] == "Подписаться на канал":
         import requests as req
         url = f"https://api.telegram.org/bot{BOT_TOKEN}/getChatMember"
@@ -373,7 +426,7 @@ def complete_task():
             return jsonify({"error": "Сначала подпишитесь на @cat_zz"}), 400
     user = supabase.table("users").select("*").eq("id", user_id).execute().data[0]
     supabase.table("users").update({"stars": user["stars"] + task["reward"]}).eq("id", user_id).execute()
-    supabase.table("user_tasks").insert({"user_id": user_id, "task_id": task_id}).execute()
+    supabase.table("user_tasks").insert({"user_id": user_id, "task_id": task_id, "completed_at": now.isoformat()}).execute()
     return jsonify({"success": True, "stars": user["stars"] + task["reward"]})
 
 def is_admin(user_id):
@@ -389,9 +442,46 @@ def admin_users():
     result = []
     for u in users.data:
         u["is_banned"] = u["id"] in ban_ids
-        u["ban_info"] = ban_ids.get(u["id"])
         result.append(u)
     return jsonify(result)
+
+@app.route("/admin/find_user")
+def admin_find_user():
+    if not is_admin(request.args.get("admin_id", 0)):
+        return jsonify({"error": "Нет доступа"}), 403
+    username = request.args.get("username", "").strip().lstrip("@")
+    if not username:
+        return jsonify({"error": "Укажите username"}), 400
+    user = supabase.table("users").select("*").eq("username", username).execute().data
+    if not user:
+        return jsonify({"error": "Пользователь не найден"}), 404
+    u = user[0]
+    ban = supabase.table("bans").select("*").eq("user_id", u["id"]).execute().data
+    u["is_banned"] = len(ban) > 0
+    u["ban_info"] = ban[0] if ban else None
+    gifts = supabase.table("user_gifts").select("*, gifts(*)").eq("user_id", u["id"]).execute().data
+    u["gifts_count"] = len(gifts)
+    u["nft_count"] = sum(1 for g in gifts if g.get("is_upgraded"))
+    return jsonify(u)
+
+@app.route("/admin/give_stars", methods=["POST"])
+def admin_give_stars():
+    data = request.json
+    if not is_admin(data.get("admin_id", 0)):
+        return jsonify({"error": "Нет доступа"}), 403
+    username = data.get("username", "").strip().lstrip("@")
+    amount = data.get("amount", 0)
+    if not username:
+        return jsonify({"error": "Укажите username"}), 400
+    if amount <= 0:
+        return jsonify({"error": "Укажите количество звёзд"}), 400
+    user = supabase.table("users").select("*").eq("username", username).execute().data
+    if not user:
+        return jsonify({"error": "Пользователь не найден"}), 404
+    user = user[0]
+    new_stars = user["stars"] + amount
+    supabase.table("users").update({"stars": new_stars}).eq("id", user["id"]).execute()
+    return jsonify({"success": True, "username": username, "stars": new_stars})
 
 @app.route("/admin/ban", methods=["POST"])
 def admin_ban():
@@ -404,7 +494,6 @@ def admin_ban():
     hours = data.get("hours", 0)
     ban_data = {"user_id": user_id, "reason": reason, "is_permanent": permanent}
     if not permanent and hours:
-        from datetime import timedelta, timezone
         until = datetime.now(timezone.utc) + timedelta(hours=hours)
         ban_data["banned_until"] = until.isoformat()
     supabase.table("bans").upsert(ban_data).execute()
