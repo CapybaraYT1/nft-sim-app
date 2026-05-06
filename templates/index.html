@@ -9,30 +9,25 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-serif;background:#0a0a0f;color:#fff;min-height:100vh;overflow-x:hidden}
 ::-webkit-scrollbar{display:none}
-
 #loader{position:fixed;inset:0;background:#0a0a0f;z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity 0.5s ease}
 #loader.hidden{opacity:0;pointer-events:none}
-.loader-logo{width:80px;height:80px;border-radius:20px;overflow:hidden;margin-bottom:4px}
+.loader-logo{width:80px;height:80px;border-radius:20px;overflow:hidden}
 .loader-logo img{width:100%;height:100%;object-fit:cover}
 .loader-title{font-size:24px;font-weight:800;letter-spacing:-0.5px;background:linear-gradient(135deg,#f59e0b,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .loader-bar{width:140px;height:3px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden}
 .loader-fill{height:100%;background:linear-gradient(90deg,#f59e0b,#f97316);border-radius:2px;animation:load 1.4s ease forwards}
 @keyframes load{0%{width:0}100%{width:100%}}
-
 #ban-screen{display:none;position:fixed;inset:0;background:#0a0a0f;z-index:998;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px}
 #ban-screen.show{display:flex}
-
 .header{padding:12px 16px 10px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,15,0.97);backdrop-filter:blur(20px);position:sticky;top:0;z-index:50;border-bottom:1px solid rgba(245,158,11,0.15)}
 .logo-wrap{display:flex;align-items:center;gap:10px}
 .logo-img{width:32px;height:32px;border-radius:8px;overflow:hidden}
 .logo-img img{width:100%;height:100%;object-fit:cover}
 .logo-text{font-size:17px;font-weight:800;letter-spacing:-0.3px}
 .stars-pill{background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.3);padding:7px 14px;border-radius:20px;font-size:14px;font-weight:700;color:#f59e0b;display:flex;align-items:center;gap:5px}
-
 .page{display:none;min-height:calc(100vh - 120px);padding-bottom:90px}
 .page.active{display:block;animation:fadeIn 0.2s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-
 .hero{margin:14px 16px;border-radius:20px;padding:22px 20px;text-align:center}
 .hero-gifts{background:linear-gradient(135deg,rgba(245,158,11,0.18),rgba(249,115,22,0.1));border:1px solid rgba(245,158,11,0.2)}
 .hero-tasks{background:linear-gradient(135deg,rgba(245,158,11,0.18),rgba(234,88,12,0.12));border:1px solid rgba(245,158,11,0.2)}
@@ -40,35 +35,30 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
 .hero-icon{font-size:44px;display:block;margin-bottom:10px}
 .hero-title{font-size:20px;font-weight:800;margin-bottom:6px}
 .hero-sub{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.5}
-
 .gifts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 16px}
 .gift-card{background:rgba(255,255,255,0.04);border:1px solid rgba(245,158,11,0.12);border-radius:16px;padding:12px 8px 10px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;transition:transform 0.15s ease;text-align:center}
 .gift-card:active{transform:scale(0.93)}
 .gift-card.sold-out{opacity:0.28;pointer-events:none}
 .g-img{width:64px;height:64px;object-fit:contain}
-.g-emoji{font-size:42px;line-height:1}
 .g-name{font-size:11px;font-weight:600;color:rgba(255,255,255,0.85);line-height:1.3}
 .g-price{font-size:12px;font-weight:700;color:#f59e0b}
-
 .tasks-list{padding:0 16px;display:flex;flex-direction:column;gap:8px}
 .task-section-label{font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.3);padding:12px 0 6px}
 .task-row{background:rgba(255,255,255,0.04);border:1px solid rgba(245,158,11,0.1);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px}
 .task-row.done{opacity:0.4}
 .t-icon{width:42px;height:42px;border-radius:11px;background:rgba(245,158,11,0.12);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.t-body{flex:1}
+.t-body{flex:1;min-width:0}
 .t-name{font-size:14px;font-weight:600;margin-bottom:2px}
 .t-reward{font-size:12px;color:#f59e0b;font-weight:600}
 .t-timer{font-size:11px;color:rgba(255,255,255,0.35);margin-top:3px}
-.t-btn{flex-shrink:0;background:linear-gradient(135deg,#f59e0b,#f97316);color:#000;border:none;border-radius:10px;padding:8px 13px;font-size:12px;font-weight:700;cursor:pointer;transition:transform 0.15s}
+.t-btn{flex-shrink:0;background:linear-gradient(135deg,#f59e0b,#f97316);color:#000;border:none;border-radius:10px;padding:8px 13px;font-size:12px;font-weight:700;cursor:pointer;transition:transform 0.15s;white-space:nowrap}
 .t-btn:active{transform:scale(0.92)}
 .t-btn:disabled{opacity:0.4;cursor:not-allowed}
 .t-done{font-size:18px;flex-shrink:0}
-
 .market-coming{text-align:center;padding:60px 20px}
 .market-coming-icon{font-size:60px;display:block;margin-bottom:16px}
 .market-coming-title{font-size:22px;font-weight:800;margin-bottom:8px;background:linear-gradient(135deg,#f59e0b,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .market-coming-sub{font-size:14px;color:rgba(255,255,255,0.35);line-height:1.6}
-
 .profile-top{margin:14px 16px;border-radius:20px;overflow:hidden;background:rgba(255,255,255,0.04);border:1px solid rgba(245,158,11,0.12)}
 .profile-bg{height:80px;background:linear-gradient(135deg,#f59e0b,#f97316,#ea580c)}
 .profile-body{padding:0 20px 20px;display:flex;flex-direction:column;align-items:center;text-align:center}
@@ -77,7 +67,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
 .p-name{font-size:20px;font-weight:800;letter-spacing:-0.3px;margin-bottom:3px}
 .p-username{font-size:13px;color:rgba(255,255,255,0.35)}
 .sec-title{font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:rgba(255,255,255,0.28);text-align:center;padding:18px 16px 10px}
-
 .owned-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 16px 16px}
 .owned-card{border-radius:16px;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;cursor:pointer;transition:transform 0.18s;padding:8px}
 .owned-card.normal{background:rgba(255,255,255,0.05);border:1px solid rgba(245,158,11,0.12)}
@@ -87,7 +76,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
 .owned-model-img{width:80%;height:80%;object-fit:contain;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
 .nft-tag{position:absolute;top:6px;right:6px;background:rgba(0,0,0,0.55);border-radius:6px;padding:2px 6px;font-size:8px;font-weight:800;color:#f59e0b;backdrop-filter:blur(4px)}
 .empty-p{text-align:center;padding:40px 20px;color:rgba(255,255,255,0.2);font-size:14px;line-height:1.7}
-
 .tab-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,15,0.97);backdrop-filter:blur(20px);border-top:1px solid rgba(245,158,11,0.15);display:flex;align-items:center;padding:8px 8px calc(8px + env(safe-area-inset-bottom));z-index:50}
 .tab-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:7px 2px;cursor:pointer;color:rgba(255,255,255,0.25);border:none;background:transparent;border-radius:12px;transition:color 0.2s,background 0.2s;gap:3px}
 .tab-item.active{color:#f59e0b;background:rgba(245,158,11,0.1)}
@@ -97,14 +85,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
 .tab-av-wrap{width:26px;height:26px;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,#f59e0b,#f97316);display:flex;align-items:center;justify-content:center;font-size:12px;border:2px solid transparent;transition:border-color 0.2s}
 .tab-item.active .tab-av-wrap{border-color:#f59e0b}
 .tab-av-wrap img{width:100%;height:100%;object-fit:cover;display:none}
-
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(12px);z-index:100;align-items:flex-end}
 .overlay.open{display:flex}
 .sheet{background:#111118;border-radius:24px 24px 0 0;padding:20px 20px 44px;width:100%;position:relative;max-height:88vh;overflow-y:auto}
 .close-x{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.09);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;color:rgba(255,255,255,0.6);transition:background 0.15s;z-index:10}
 .close-x:active{background:rgba(255,255,255,0.2)}
 .sheet-img{width:90px;height:90px;object-fit:contain;display:block;margin:8px auto 12px}
-.sheet-emoji{font-size:68px;text-align:center;display:block;margin:8px 0 12px}
 .sheet-title{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px;letter-spacing:-0.3px}
 .info-row{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:rgba(255,255,255,0.04);border-radius:11px;margin-bottom:6px}
 .info-label{font-size:13px;color:rgba(255,255,255,0.38)}
@@ -116,14 +102,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
 .btn-gold{background:linear-gradient(135deg,#f59e0b,#f97316);color:#000}
 .btn-red{background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff}
 .btn-ghost{background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.4);border:none}
-
 .conf-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(12px);z-index:200;align-items:center;justify-content:center;padding:20px}
 .conf-overlay.open{display:flex}
 .conf-box{background:#111118;border:1px solid rgba(245,158,11,0.15);border-radius:20px;padding:26px 20px;width:100%;max-width:320px;text-align:center}
 .conf-icon{font-size:48px;margin-bottom:12px}
 .conf-title{font-size:18px;font-weight:800;margin-bottom:6px}
 .conf-sub{font-size:13px;color:rgba(255,255,255,0.38);margin-bottom:22px;line-height:1.5}
-
 #gen-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.93);backdrop-filter:blur(16px);z-index:300;align-items:center;justify-content:center;flex-direction:column;gap:24px}
 #gen-overlay.show{display:flex}
 .gen-box{background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);border-radius:24px;padding:36px 48px;text-align:center}
@@ -135,7 +119,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
 .gen-dot:nth-child(2){animation-delay:0.2s}
 .gen-dot:nth-child(3){animation-delay:0.4s}
 @keyframes dotPulse{0%,100%{opacity:0.25;transform:scale(0.8)}50%{opacity:1;transform:scale(1.2)}}
-
 #nft-result{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(16px);z-index:301;align-items:flex-end;justify-content:center}
 #nft-result.show{display:flex;animation:slideUp 0.3s ease}
 @keyframes slideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
@@ -144,7 +127,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
 .nft-card-model{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px}
 .nft-card-model img{max-width:72%;max-height:72%;object-fit:contain;filter:drop-shadow(0 8px 28px rgba(0,0,0,0.5))}
 .nft-serial{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);border-radius:8px;padding:4px 12px;font-size:13px;font-weight:800;color:#fff;white-space:nowrap}
-.nft-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;color:rgba(255,255,255,0.8);z-index:10}
+.nft-close{position:absolute;top:14px;right:14px;width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;color:rgba(255,255,255,0.8);z-index:10}
 .nft-info{background:#111118;padding:18px 20px 36px}
 .nft-name{font-size:22px;font-weight:800;letter-spacing:-0.3px;margin-bottom:14px}
 .nft-table{border-radius:14px;overflow:hidden;border:1px solid rgba(245,158,11,0.12)}
@@ -153,42 +136,37 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
 .nft-row-label{font-size:13px;color:rgba(255,255,255,0.38)}
 .nft-row-val{font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px}
 .chance-badge{background:rgba(245,158,11,0.12);border-radius:6px;padding:2px 7px;font-size:11px;color:#f59e0b;font-weight:600}
-
 .nft-owned-bg{width:100%;padding-top:55%;position:relative}
 .nft-owned-model{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:14px}
 .nft-owned-model img{max-width:65%;max-height:65%;object-fit:contain;filter:drop-shadow(0 6px 16px rgba(0,0,0,0.4))}
-
 .admin-section{margin:0 16px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(245,158,11,0.1);border-radius:16px;overflow:hidden}
 .admin-section-title{padding:14px 16px;font-size:12px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:rgba(255,255,255,0.35);border-bottom:1px solid rgba(255,255,255,0.05)}
-.admin-search-row{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;gap:8px}
-.admin-input{flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:10px 12px;color:#fff;font-size:13px;outline:none}
+.admin-search-wrap{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;gap:8px;align-items:center}
+.admin-input{flex:1;min-width:0;background:rgba(255,255,255,0.06);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:10px 12px;color:#fff;font-size:13px;outline:none}
 .admin-input::placeholder{color:rgba(255,255,255,0.25)}
-.admin-search-btn{background:linear-gradient(135deg,#f59e0b,#f97316);color:#000;border:none;border-radius:10px;padding:10px 14px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
+.admin-search-btn{flex-shrink:0;background:linear-gradient(135deg,#f59e0b,#f97316);color:#000;border:none;border-radius:10px;padding:10px 14px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
+.admin-stars-num{width:80px;flex-shrink:0;background:rgba(255,255,255,0.06);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:10px 8px;color:#fff;font-size:13px;outline:none;text-align:center}
+.admin-stars-num::placeholder{color:rgba(255,255,255,0.25)}
 .admin-user-card{padding:14px 16px}
 .admin-user-name{font-size:16px;font-weight:700;margin-bottom:4px}
-.admin-user-meta{font-size:12px;color:rgba(255,255,255,0.4);line-height:1.6}
+.admin-user-meta{font-size:12px;color:rgba(255,255,255,0.4);line-height:1.7}
 .admin-user-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
 .admin-action-btn{padding:8px 14px;border-radius:10px;border:none;font-size:12px;font-weight:700;cursor:pointer}
 .btn-ban-action{background:rgba(239,68,68,0.15);color:#ef4444;border:1px solid rgba(239,68,68,0.3)}
 .btn-unban-action{background:rgba(34,197,94,0.15);color:#22c55e;border:1px solid rgba(34,197,94,0.3)}
-.admin-banned-badge{display:inline-block;background:rgba(239,68,68,0.15);color:#ef4444;border:1px solid rgba(239,68,68,0.3);border-radius:8px;padding:2px 8px;font-size:10px;font-weight:700;margin-left:8px}
+.admin-banned-badge{display:inline-block;background:rgba(239,68,68,0.15);color:#ef4444;border:1px solid rgba(239,68,68,0.3);border-radius:8px;padding:2px 8px;font-size:10px;font-weight:700;margin-left:6px}
 .admin-gift-row{padding:14px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(255,255,255,0.04)}
 .admin-gift-row:last-child{border-bottom:none}
 .admin-gift-emoji{font-size:32px;flex-shrink:0}
 .admin-gift-info{flex:1}
 .admin-gift-name{font-size:14px;font-weight:600}
 .admin-gift-meta{font-size:11px;color:rgba(255,255,255,0.35);margin-top:2px}
-.btn-admin-del{background:rgba(239,68,68,0.12);color:#ef4444;border:1px solid rgba(239,68,68,0.25);border-radius:8px;padding:6px 12px;font-size:11px;font-weight:700;cursor:pointer}
-.admin-stars-row{padding:12px 16px;display:flex;gap:8px;align-items:center;border-bottom:1px solid rgba(255,255,255,0.05)}
-.admin-stars-input{flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:10px 12px;color:#fff;font-size:13px;outline:none}
-.admin-stars-input::placeholder{color:rgba(255,255,255,0.25)}
-
+.btn-admin-del{background:rgba(239,68,68,0.12);color:#ef4444;border:1px solid rgba(239,68,68,0.25);border-radius:8px;padding:6px 12px;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0}
 .admin-r-input{background:rgba(255,255,255,0.06);border:1px solid rgba(245,158,11,0.2);border-radius:12px;padding:12px 14px;color:#fff;font-size:14px;margin-bottom:8px;outline:none;width:100%}
 .admin-r-input::placeholder{color:rgba(255,255,255,0.25)}
 .admin-radio-row{display:flex;gap:8px;margin-bottom:12px}
 .admin-radio{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.5);font-size:13px;font-weight:600;cursor:pointer;text-align:center;transition:all 0.15s}
 .admin-radio.selected{border-color:#f59e0b;background:rgba(245,158,11,0.12);color:#f59e0b}
-
 .state-msg{text-align:center;padding:50px 20px;color:rgba(255,255,255,0.2);font-size:14px;line-height:1.7}
 </style>
 </head>
@@ -266,26 +244,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
     <span class="hero-icon">🛡️</span>
     <div class="hero-title">Панель администратора</div>
   </div>
-
   <div class="sec-title">Поиск пользователя</div>
   <div class="admin-section">
-    <div class="admin-search-row">
+    <div class="admin-search-wrap">
       <input class="admin-input" id="admin-search-input" placeholder="@username"/>
       <button class="admin-search-btn" onclick="adminSearchUser()">Найти</button>
     </div>
     <div id="admin-user-result"></div>
   </div>
-
   <div class="sec-title">Начислить звёзды</div>
   <div class="admin-section">
-    <div class="admin-search-row">
+    <div class="admin-search-wrap">
       <input class="admin-input" id="give-stars-username" placeholder="@username"/>
-      <input class="admin-stars-input" id="give-stars-amount" placeholder="Кол-во" type="number" style="width:90px;flex:none"/>
-      <button class="admin-search-btn" onclick="adminGiveStars()">✚</button>
+      <input class="admin-stars-num" id="give-stars-amount" placeholder="★" type="number"/>
+      <button class="admin-search-btn" onclick="adminGiveStars()">Дать</button>
     </div>
-    <div id="give-stars-result" style="padding:0 16px 12px;font-size:13px;color:#22c55e"></div>
+    <div id="give-stars-result" style="padding:0 16px 10px;font-size:13px"></div>
   </div>
-
   <div class="sec-title">Подарки</div>
   <div class="admin-section" id="admin-gifts-list"><div class="state-msg">Загрузка…</div></div>
 </div>
@@ -311,12 +286,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
   </button>
 </nav>
 
-<!-- BUY MODAL -->
 <div class="overlay" id="modal-buy">
   <div class="sheet">
     <button class="close-x" onclick="closeBuy()">✕</button>
-    <img class="sheet-img" id="b-img" src="" alt="" onerror="this.style.display='none'"/>
-    <span class="sheet-emoji" id="b-emoji" style="display:none"></span>
+    <img class="sheet-img" id="b-img" src="" alt=""/>
     <div class="sheet-title" id="b-name"></div>
     <div class="price-big" id="b-price"></div>
     <div class="info-row"><span class="info-label">Осталось</span><span class="info-val" id="b-supply"></span></div>
@@ -324,9 +297,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
   </div>
 </div>
 
-<!-- OWNED MODAL -->
 <div class="overlay" id="modal-owned">
-  <div class="sheet" id="owned-sheet">
+  <div class="sheet">
     <button class="close-x" onclick="closeOwned()">✕</button>
     <div id="owned-nft-preview" style="display:none;margin:-20px -20px 16px;border-radius:16px 16px 0 0;overflow:hidden">
       <div class="nft-owned-bg" id="owned-bg-preview">
@@ -334,7 +306,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
       </div>
     </div>
     <img class="sheet-img" id="o-gift-img" src="" alt="" style="display:none"/>
-    <span class="sheet-emoji" id="o-emoji" style="display:none"></span>
     <div class="sheet-title" id="o-name"></div>
     <div class="info-row" id="o-nft-row" style="display:none"><span class="info-label">NFT #</span><span class="info-val" id="o-nft"></span></div>
     <div class="info-row" id="o-model-row" style="display:none"><span class="info-label">Модель</span><span class="info-val" id="o-model"></span></div>
@@ -344,7 +315,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
   </div>
 </div>
 
-<!-- CONF UPGRADE -->
 <div class="conf-overlay" id="conf-upg">
   <div class="conf-box">
     <div class="conf-icon">✨</div>
@@ -355,7 +325,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
   </div>
 </div>
 
-<!-- CONF SELL -->
 <div class="conf-overlay" id="conf-sell">
   <div class="conf-box">
     <div class="conf-icon">💰</div>
@@ -366,7 +335,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
   </div>
 </div>
 
-<!-- NFT GENERATION -->
 <div id="gen-overlay">
   <div class="gen-box">
     <div class="gen-spinner"></div>
@@ -379,7 +347,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
   </div>
 </div>
 
-<!-- NFT RESULT -->
 <div id="nft-result">
   <div class="nft-card">
     <div class="nft-card-bg" id="nft-bg">
@@ -399,7 +366,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
   </div>
 </div>
 
-<!-- ADMIN BAN -->
 <div class="conf-overlay" id="conf-ban">
   <div class="conf-box">
     <div class="conf-icon">🚫</div>
@@ -420,9 +386,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto,sans-s
 const tg=window.Telegram.WebApp;
 tg.ready();tg.expand();
 const ADMIN_ID=7231807922;
-const LOGO='https://i.ibb.co/qYFSKBPb/IMG-20260505-121717-095.jpg';
 const EGG_IMG='https://telegifter.ru/wp-content/themes/gifts/assets/img/gifts/noupdate/Easter%20Egg.webp';
-
 let currentUser=null,selGift=null,selUserGift=null;
 let banType='temp',adminTargetUser=null;
 const tgUser=tg.initDataUnsafe?.user;
@@ -448,12 +412,11 @@ function loadTab(n){
   if(n==='profile')loadProfile();
   if(n==='admin')loadAdmin();
 }
-async function api(url){const r=await fetch(url);return r.json();}
-async function post(url,body){const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});return r.json();}
+async function api(url){const r=await fetch(url);if(!r.ok)throw new Error(r.status);return r.json();}
+async function post(url,body){const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});if(!r.ok&&r.status!==400&&r.status!==409){throw new Error(r.status);}return r.json();}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 function enc(g){return encodeURIComponent(JSON.stringify(g))}
 function setStars(n){if(currentUser)currentUser.stars=n;document.getElementById('stars-count').textContent=n;}
-
 function formatTimer(sec){
   const h=Math.floor(sec/3600),m=Math.floor((sec%3600)/60),s=sec%60;
   if(h>0)return h+'ч '+(m<10?'0':'')+m+'м';
@@ -511,7 +474,7 @@ async function loadGifts(){
       const rem=g.total_supply-g.sold,out=rem<=0;
       const imgUrl=g.img||EGG_IMG;
       return `<div class="gift-card${out?' sold-out':''}" onclick="openBuy('${enc(g)}')">
-        <img class="g-img" src="${imgUrl}" alt="" onerror="this.style.display='none'"/>
+        <img class="g-img" src="${imgUrl}" alt=""/>
         <div class="g-name">${esc(g.name)}</div>
         <div class="g-price">⭐ ${g.price}</div>
       </div>`;
@@ -522,10 +485,7 @@ async function loadGifts(){
 function openBuy(encoded){
   selGift=JSON.parse(decodeURIComponent(encoded));
   const rem=selGift.total_supply-selGift.sold;
-  const imgUrl=selGift.img||EGG_IMG;
-  const imgEl=document.getElementById('b-img');
-  imgEl.src=imgUrl;imgEl.style.display='block';
-  document.getElementById('b-emoji').style.display='none';
+  document.getElementById('b-img').src=selGift.img||EGG_IMG;
   document.getElementById('b-name').textContent=selGift.name;
   document.getElementById('b-price').textContent='⭐ '+selGift.price;
   document.getElementById('b-supply').textContent=rem+' шт.';
@@ -541,7 +501,7 @@ async function confirmBuy(){
     const d=await post('/buy_gift',{user_id:currentUser.id,gift_id:selGift.id});
     if(d.error){tg.showAlert(d.error);}
     else{setStars(d.stars_left);closeBuy();tg.showAlert('🎉 Подарок куплен!');loadGifts();loaded.profile=false;}
-  }catch(e){tg.showAlert('Ошибка');}
+  }catch(e){tg.showAlert('Ошибка сети');}
   finally{btn.disabled=false;btn.textContent='Купить';}
 }
 
@@ -556,25 +516,15 @@ async function loadTasks(){
     const oneTime=tasks.filter(t=>!t.is_daily);
     const daily=tasks.filter(t=>t.is_daily);
     let html='';
-    if(oneTime.length){
-      html+='<div class="task-section-label">Разовые</div>';
-      html+=oneTime.map(t=>renderTask(t)).join('');
-    }
-    if(daily.length){
-      html+='<div class="task-section-label">Ежедневные</div>';
-      html+=daily.map(t=>renderTask(t)).join('');
-    }
+    if(oneTime.length){html+='<div class="task-section-label">Разовые</div>';html+=oneTime.map(t=>renderTask(t)).join('');}
+    if(daily.length){html+='<div class="task-section-label">Ежедневные</div>';html+=daily.map(t=>renderTask(t)).join('');}
     c.innerHTML=html;
-    daily.forEach(t=>{
-      if(t.done&&t.cooldown_seconds>0)startTimer(t.id,t.cooldown_seconds);
-    });
-  }catch(e){c.textContent='Ошибка';}
+    daily.forEach(t=>{if(t.done&&t.cooldown_seconds>0)startTimer(t.id,t.cooldown_seconds);});
+  }catch(e){c.className='state-msg';c.textContent='Ошибка загрузки заданий';}
 }
 
 function renderTask(t){
-  const timerHtml=t.is_daily&&t.done&&t.cooldown_seconds>0
-    ?`<div class="t-timer" id="timer-${t.id}">${formatTimer(t.cooldown_seconds)}</div>`:
-    '';
+  const timerHtml=t.is_daily&&t.done&&t.cooldown_seconds>0?`<div class="t-timer" id="timer-${t.id}">${formatTimer(t.cooldown_seconds)}</div>`:'';
   return `<div class="task-row${t.done?' done':''}" id="task-${t.id}">
     <div class="t-icon">${t.emoji||'⭐'}</div>
     <div class="t-body">
@@ -604,13 +554,12 @@ function startTimer(taskId,seconds){
         if(doneEl){
           const btn=document.createElement('button');
           btn.className='t-btn';
-          const reward=parseInt(row.querySelector('.t-reward').textContent.replace(/\D/g,''));
-          const tid=taskId;
-          btn.onclick=function(){doTask(tid,reward,this);};
+          const rewardEl=row.querySelector('.t-reward');
+          const reward=rewardEl?parseInt(rewardEl.textContent.replace(/\D/g,'')):0;
+          btn.onclick=function(){doTask(taskId,reward,this);};
           btn.textContent='Выполнить';
           doneEl.replaceWith(btn);
         }
-        row.classList.remove('done');
       }
     }
   },1000);
@@ -626,7 +575,7 @@ async function doTask(taskId,reward,btn){
       try{
         const d=await post('/complete_task',{user_id:currentUser.id,task_id:taskId});
         if(d.error){tg.showAlert(d.error);btn.disabled=false;btn.textContent='Выполнить';return;}
-        setStars(d.stars);doneTask(row,false);tg.showAlert('⭐ +'+reward);
+        setStars(d.stars);markDone(row);tg.showAlert('⭐ +'+reward);
       }catch(e){tg.showAlert('Ошибка');btn.disabled=false;btn.textContent='Выполнить';}
     },3000);return;
   }
@@ -635,17 +584,17 @@ async function doTask(taskId,reward,btn){
     btn.disabled=true;btn.textContent='Отправлено';return;
   }
   if(title==='Улучшить подарок'){
-    tg.showAlert('Улучшите любой подарок в профиле чтобы получить награду!');return;
+    tg.showAlert('Улучшите любой подарок в профиле чтобы получить +200 ⭐!');return;
   }
   btn.disabled=true;btn.textContent='…';
   try{
     const d=await post('/complete_task',{user_id:currentUser.id,task_id:taskId});
     if(d.error){tg.showAlert(d.error);btn.disabled=false;btn.textContent='Выполнить';return;}
-    setStars(d.stars);doneTask(row,false);tg.showAlert('⭐ +'+reward);
+    setStars(d.stars);markDone(row);tg.showAlert('⭐ +'+reward);
   }catch(e){tg.showAlert('Ошибка');btn.disabled=false;btn.textContent='Выполнить';}
 }
 
-function doneTask(row,isDaily,cooldown){
+function markDone(row){
   row.classList.add('done');
   const btn=row.querySelector('.t-btn');
   if(btn){const d=document.createElement('div');d.className='t-done';d.textContent='✅';btn.replaceWith(d);}
@@ -681,13 +630,11 @@ function openOwned(encoded){
   const g=selUserGift;
   const isNft=g.is_upgraded&&g.bg_color&&g.model_url;
   const preview=document.getElementById('owned-nft-preview');
-  const emojiEl=document.getElementById('o-emoji');
   const giftImgEl=document.getElementById('o-gift-img');
   if(isNft){
     preview.style.display='block';
     document.getElementById('owned-bg-preview').style.background='#'+g.bg_color;
     document.getElementById('owned-model-img').src=g.model_url;
-    emojiEl.style.display='none';
     giftImgEl.style.display='none';
     document.getElementById('o-model-row').style.display='flex';
     document.getElementById('o-bg-row').style.display='flex';
@@ -695,7 +642,6 @@ function openOwned(encoded){
     document.getElementById('o-bg').textContent=g.bg_name+' ('+g.bg_chance+'%)';
   }else{
     preview.style.display='none';
-    emojiEl.style.display='none';
     giftImgEl.src=g.gifts?.img||EGG_IMG;
     giftImgEl.style.display='block';
     document.getElementById('o-model-row').style.display='none';
@@ -729,7 +675,7 @@ async function doUpgrade(){
     loaded.tasks=false;
   }catch(e){
     document.getElementById('gen-overlay').classList.remove('show');
-    tg.showAlert('Ошибка: '+e.message);
+    tg.showAlert('Ошибка соединения');
   }
 }
 
@@ -788,17 +734,13 @@ async function adminSearchUser(){
   const res=document.getElementById('admin-user-result');
   res.innerHTML='<div style="padding:12px 16px;color:rgba(255,255,255,0.4);font-size:13px">Поиск…</div>';
   try{
-    const u=await api('/admin/find_user?admin_id='+ADMIN_ID+'&username='+encodeURIComponent(username));
-    if(u.error){res.innerHTML=`<div style="padding:12px 16px;color:#ef4444;font-size:13px">${u.error}</div>`;return;}
+    const u=await api('/admin/find_user?admin_id='+ADMIN_ID+'&username='+encodeURIComponent(username.replace('@','')));
+    if(u.error){res.innerHTML=`<div style="padding:12px 16px;color:#ef4444;font-size:13px">${esc(u.error)}</div>`;return;}
     adminTargetUser=u;
     const banBadge=u.is_banned?'<span class="admin-banned-badge">БАН</span>':'';
     res.innerHTML=`<div class="admin-user-card">
       <div class="admin-user-name">@${esc(u.username||'—')}${banBadge}</div>
-      <div class="admin-user-meta">
-        ID: ${u.id}<br>
-        ⭐ Звёзды: ${u.stars}<br>
-        🎁 Подарков: ${u.gifts_count||0} (NFT: ${u.nft_count||0})
-      </div>
+      <div class="admin-user-meta">ID: ${u.id}<br>⭐ Звёзды: ${u.stars}<br>🎁 Подарков: ${u.gifts_count||0} (NFT: ${u.nft_count||0})</div>
       <div class="admin-user-actions">
         ${u.is_banned
           ?`<button class="admin-action-btn btn-unban-action" onclick="adminUnbanUser(${u.id})">✅ Разбанить</button>`
@@ -806,7 +748,7 @@ async function adminSearchUser(){
         }
       </div>
     </div>`;
-  }catch(e){res.innerHTML='<div style="padding:12px 16px;color:#ef4444;font-size:13px">Ошибка</div>';}
+  }catch(e){res.innerHTML='<div style="padding:12px 16px;color:#ef4444;font-size:13px">Ошибка поиска</div>';}
 }
 
 function adminOpenBan(userId,username){
@@ -833,7 +775,7 @@ async function adminGiveStars(){
   const res=document.getElementById('give-stars-result');
   if(!username||amount<=0){res.textContent='Укажите username и количество';res.style.color='#ef4444';return;}
   try{
-    const d=await post('/admin/give_stars',{admin_id:ADMIN_ID,username,amount});
+    const d=await post('/admin/give_stars',{admin_id:ADMIN_ID,username:username.replace('@',''),amount});
     if(d.error){res.textContent=d.error;res.style.color='#ef4444';return;}
     res.textContent='✅ @'+d.username+' получил ⭐ '+amount+' (итого: '+d.stars+')';
     res.style.color='#22c55e';
@@ -854,7 +796,7 @@ async function loadAdminGifts(){
           <div class="admin-gift-name">${esc(g.name)}</div>
           <div class="admin-gift-meta">${g.sold}/${g.total_supply} · NFT: ${g.nft_count||0}</div>
         </div>
-        <button class="btn-admin-del" onclick="adminDeleteGiftType(${g.id},'${esc(g.name)}')">Удалить все</button>
+        <button class="btn-admin-del" onclick="adminDeleteGiftType(${g.id},'${esc(g.name)}')">Удалить</button>
       </div>`).join('');
   }catch(e){c.innerHTML='<div class="state-msg">Ошибка</div>';}
 }
